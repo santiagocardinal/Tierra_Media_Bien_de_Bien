@@ -80,6 +80,6 @@ public class Dwarf
         foreach (var item in dwarf.Element)
         {
             this.AmountLife -= item.AttackValue;
-        }*/
-    }
+        }
+    }*/
 }
