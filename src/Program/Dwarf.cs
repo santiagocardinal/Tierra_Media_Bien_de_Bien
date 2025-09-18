@@ -61,7 +61,7 @@ public class Dwarf
         this.AmountLife = initialLife;
     }
 
-    public void DwarfElf(Elf elf)
+    /*public void DwarfElf(Elf elf)
     {
         foreach (var item in elf.Element)
         {
@@ -80,9 +80,6 @@ public class Dwarf
         foreach (var item in dwarf.Element)
         {
             this.AmountLife -= item.AttackValue;
-        }
+        }*/
     }
-    
-    
-    
 }
