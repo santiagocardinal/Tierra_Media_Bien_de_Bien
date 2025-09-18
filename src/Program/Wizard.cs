@@ -4,12 +4,12 @@ namespace Program;
 
 public class Wizard
 {
-    private ArrayList<Item> lstElement;
+    private List<Item> lstElement;
     private int amountLife;
     public static int initialLife { get; set; } = 50;
-    private SpellBook spell;
+    //private SpellBook spell;
 
-    public ArrayList<Item> LstElement
+    public List<Item> LstElement
     {
         get { return lstElement; }
         set { LstElement = value; }
@@ -28,18 +28,18 @@ public class Wizard
         set { InitialLife = value; }
     }
 */
-    public SpellBook Spell
+  /*  public SpellBook Spell
     {
         get { return spell; }
         set { spell = value; }
     }
-    
-    public Wizard(ArrayList<Item> element, spellBook spell)
+  */  
+    public Wizard(List<Item> element /*,spellBook spell*/)
     {
         this.LstElement = element;
         this.AmountLife = initialLife;
        // this.InitialLife = initialLife;
-        this.Spell = spell;
+       // this.Spell = spell;
     }
 
     public void AddItem(Item element)
