@@ -8,7 +8,7 @@ public class Wizard
     private int amountLife;
     private string name;
     public static int initialLife { get; set; } = 50;
-    //private SpellBook spell;
+    private SpellBook spell;
 
     public string Name
     {
@@ -35,19 +35,19 @@ public class Wizard
         set { InitialLife = value; }
     }
 */
-  /*  public SpellBook Spell
+    public SpellBook Spell
     {
         get { return spell; }
         set { spell = value; }
     }
-  */  
-    public Wizard(string name /*, Item element spellBook spell*/)
+   
+    public Wizard(string name, SpellBook book)
     {
         this.Name = name;
         this.LstElement = new List<Item>();
         this.AmountLife = initialLife;
        // this.InitialLife = initialLife;
-       // this.Spell = spell;
+        this.Spell = book;
     }
 
     public void AddItem(Item element)
