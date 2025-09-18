@@ -6,9 +6,16 @@ public class Wizard
 {
     private List<Item> lstElement;
     private int amountLife;
+    private string name;
     public static int initialLife { get; set; } = 50;
     //private SpellBook spell;
 
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+    
     public List<Item> LstElement
     {
         get { return lstElement; }
@@ -18,8 +25,8 @@ public class Wizard
 
     public int AmountLife
     {
-        get { return AmountLife; }
-        set { AmountLife = value; }
+        get { return amountLife; }
+        set { amountLife = value; }
     }
 
     /*public int InitialLife
@@ -34,9 +41,10 @@ public class Wizard
         set { spell = value; }
     }
   */  
-    public Wizard(List<Item> element /*,spellBook spell*/)
+    public Wizard(string name /*, Item element spellBook spell*/)
     {
-        this.LstElement = element;
+        this.Name = name;
+        this.LstElement = new List<Item>();
         this.AmountLife = initialLife;
        // this.InitialLife = initialLife;
        // this.Spell = spell;
@@ -68,39 +76,38 @@ public class Wizard
         this.LstElement[indice] = e2;
     }
 
-   /* public void GetAttack(Item element)
+    public void GetAttack(Item element)
     {
-        this.AmountLife-=attack.Damage;
+        this.AmountLife-=element.AttackValue;
     }
 
-    public void GetDefense(LstElement defense)
+    public void GetDefense(Item defense)
     {
-        this.AmountLife+=defense.Defense;
+        this.AmountLife+=defense.DefenseValue;
     }
-*/
+
     public void Heal()
     {
         this.AmountLife = initialLife;
     }
 
-  /*  public void AddSpell(SpellBook book)
+    /*public void AddSpell(SpellBook book)
     {
         
-    }
-*/
- /*   public void WizardElf(Elf elf)
+    }*/
+    public void WizardElf(Elf elf)
     {
-        foreach (var item in elf.LstElement)
+        foreach (var item in elf.Element)
         {
-            this.AmountLife -= item.DamageValue;
+            this.AmountLife -= item.AttackValue;
         }
     }
 
     public void WizardDwarf(Dwarf dwarf)
     {
-        foreach (var item in dwarf.LstElement)
+        foreach (var item in dwarf.Element)
         {
-            this.AmountLife -= item.DamageValue;
+            this.AmountLife -= item.AttackValue;
         }
     }
 
@@ -108,7 +115,7 @@ public class Wizard
     {
         foreach (var item in wizard.LstElement)
         {
-            this.AmountLife -= item.DamageValue;
+            this.AmountLife -= item.AttackValue;
         }
-    }*/
+    }
 }

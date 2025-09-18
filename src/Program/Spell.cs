@@ -1,6 +1,6 @@
 namespace Program
 {
-    class Spell
+    public class Spell
     {
         public string SpellName { get; set; }
         public int Poder { get; set; }

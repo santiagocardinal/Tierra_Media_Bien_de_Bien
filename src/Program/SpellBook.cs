@@ -1,6 +1,6 @@
 namespace Program
 {
-    class SpellBook
+    public class SpellBook
     {
         private int AmountSpell { get; set; }
         private List<Spell> Spell { get; set; }

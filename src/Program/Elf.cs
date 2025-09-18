@@ -28,10 +28,10 @@ public class Elf
 
     //public int VidaInicial{ get {return vidaInicial;} set { vidaInicial = value; } }
 
-    public Elf(string name, List<Item> element)
+    public Elf(string name)
     {
         this.Name = name;
-        this.Element = element ?? new List<Item>();
+        this.Element  = new List<Item>();
         this.AmountLife = initialLife;
     }
 

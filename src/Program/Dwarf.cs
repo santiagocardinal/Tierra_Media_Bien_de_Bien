@@ -26,10 +26,10 @@ public class Dwarf
         set { amountLife = value; }
     }
 
-    public Dwarf(string name, List<Item> element)
+    public Dwarf(string name)
     {
         this.Name = name;
-        this.Element = element ?? new List<Item>();
+        this.Element = new List<Item>();
         this.AmountLife = initialLife;
     }
 
@@ -61,7 +61,7 @@ public class Dwarf
         this.AmountLife = initialLife;
     }
 
-    /*public void DwarfElf(Elf elf)
+    public void DwarfElf(Elf elf)
     {
         foreach (var item in elf.Element)
         {
@@ -81,5 +81,5 @@ public class Dwarf
         {
             this.AmountLife -= item.AttackValue;
         }
-    }*/
+    }
 }
