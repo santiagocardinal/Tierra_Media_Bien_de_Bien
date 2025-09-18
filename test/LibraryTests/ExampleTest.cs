@@ -30,7 +30,7 @@ namespace LibraryTests
             // Hechizos y libro
             fireball = new Spell("Fireball", 20);
             ice = new Spell("Ice", 15);
-            spellBook = new SpellBook(2, new List<Spell> { fireball, ice });
+            spellBook = new SpellBook();
         }
 
         // ---------------- Personajes ----------------
@@ -103,7 +103,8 @@ namespace LibraryTests
 
         [Test]
         public void SpellBookStoresSpellsCorrectly()
-        {
+        {   spellBook.AddSpell(fireball);
+            wizard.
             Assert.IsNotNull(spellBook);
         }
     }

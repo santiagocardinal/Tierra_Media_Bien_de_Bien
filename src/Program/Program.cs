@@ -48,7 +48,7 @@ public class Program
         // Crear hechizos y libro de hechizos
         Spell fireball = new Spell("Bola de fuego", 30);
         Spell ice = new Spell("Hielo", 15);
-        SpellBook spellBook = new SpellBook(2, new List<Spell> { fireball, ice });
+        SpellBook spellBook = new SpellBook();
 
         Console.WriteLine("\n=== Hechizos en el libro ===");
         Console.WriteLine($"1. {fireball.SpellName} (Poder {fireball.Poder})");

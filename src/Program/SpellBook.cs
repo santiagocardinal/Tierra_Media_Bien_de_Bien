@@ -5,10 +5,16 @@ namespace Program
         private int AmountSpell { get; set; }
         private List<Spell> Spell { get; set; }
 
-        public SpellBook(int amountSpell, List<Spell> spellList)
+        public SpellBook()
         {
-            this.Spell = spellList;
-            this.AmountSpell = amountSpell;
+            this.Spell = new List<Spell>();
         }
+        
+        public void AddSpell(Spell spell)
+        {
+            this.Spell.Add(spell);
+            AmountSpell ++;
+        }
+        
     }
 }

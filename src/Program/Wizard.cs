@@ -8,7 +8,7 @@ public class Wizard
     private int amountLife;
     private string name;
     public static int initialLife { get; set; } = 50;
-    //private SpellBook spell;
+    private SpellBook spell;
 
     public string Name
     {
