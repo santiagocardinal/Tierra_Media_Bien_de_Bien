@@ -12,7 +12,7 @@ public class Wizard
     public List<Item> LstElement
     {
         get { return lstElement; }
-        set { LstElement = value; }
+        set { lstElement = value; }
 
     }
 
@@ -61,7 +61,7 @@ public class Wizard
         {
             if (i == e1)
             {
-                indice = LstElement.indexOf(i);
+                indice = LstElement.IndexOf(i);
             }
         }
 
