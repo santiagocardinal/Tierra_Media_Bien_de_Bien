@@ -1,65 +1,49 @@
 ﻿namespace Program;
-
-public class Program
+public class MainProgram
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        // Crear algunos ítems
-        Item sword = new Item("Espada", 15, 5);
-        Item shield = new Item("Escudo", 5, 20);
-        Item axe = new Item("Hacha", 20, 10);
-        Item wand = new Item("Varita", 25, 2);
-        
-        //Hechizos 
+        // Crear ítems
+        Item espada = new Item("Espada", 10, 2);
+        Item escudo = new Item("Escudo", 2, 10);
+        Item arco = new Item("Arco", 7, 3);
 
-        Spell fuego = new Spell("Bola de fuego", 15);
-        SpellBook book = new SpellBook();
-        book.AddSpell(fuego);
+        // Crear hechizos
+        Spell rayo = new Spell("Rayo", 20);
+
+        // Crear SpellBook
+        SpellBook libroHechizos = new SpellBook();
+        libroHechizos.AddSpell(rayo);
 
         // Crear personajes
+        Wizard gandalf = new Wizard("Gandalf", libroHechizos);
+        gandalf.AddItem(escudo);
+
         Elf legolas = new Elf("Legolas");
-        Wizard gandalf = new Wizard("Baltazar",book);
+        legolas.AddItem(arco);
+
         Dwarf gimli = new Dwarf("Gimli");
+        gimli.AddItem(espada);
 
-        Console.WriteLine("\n=== Estado inicial ===\n");
-        Console.WriteLine($"Elfo {legolas.Name} -> Vida: {legolas.AmountLife}");
-        Console.WriteLine($"Mago -> Vida: {gandalf.AmountLife}");
-        Console.WriteLine($"Enano {gimli.Name} -> Vida: {gimli.AmountLife}");
+        // Mostrar vida inicial
+        Console.WriteLine($"Vida de {legolas.Name}: {legolas.AmountLife}");
+        Console.WriteLine($"Vida de {gimli.Name}: {gimli.AmountLife}");
+        Console.WriteLine($"Vida de {gandalf.Name}: {gandalf.AmountLife}");
 
-        // Agregar ítems
-        legolas.AddItem(shield);
-        legolas.AddItem(sword);
-        gandalf.AddItem(shield);
-        gandalf.AddItem(axe);
-        gimli.AddItem(sword);
+        // Gandalf ataca con hechizo a Legolas
+        gandalf.WizardAttackWithSpell(legolas, rayo);
+        Console.WriteLine($"{gandalf.Name} ataca a {legolas.Name} con su poder de Rayo!");
+        Console.WriteLine($"Vida de {legolas.Name} después del ataque: {legolas.AmountLife}");
 
-        Console.WriteLine("\n=== Después de agregar ítems ===\n");
-        Console.WriteLine($"Elfo {legolas.Name} -> Vida: {legolas.AmountLife}");
-        Console.WriteLine($"Mago -> Vida: {gandalf.AmountLife}");
-        Console.WriteLine($"Enano {gimli.Name} -> Vida: {gimli.AmountLife}");
-
-        // Simular daño y curación
-        legolas.AmountLife -= 30;
-        gimli.AmountLife -= 20;
-        Console.WriteLine("\n=== Después de recibir daño ===\n");
-        Console.WriteLine($"Elfo {legolas.Name} -> Vida: {legolas.AmountLife}");
-        Console.WriteLine($"Enano {gimli.Name} -> Vida: {gimli.AmountLife}");
-
-        legolas.Heal();
-        gimli.Heal();
-        Console.WriteLine("\n=== Después de curarse ===\n");
-        Console.WriteLine($"Elfo {legolas.Name} -> Vida: {legolas.AmountLife}");
-        Console.WriteLine($"Enano {gimli.Name} -> Vida: {gimli.AmountLife}");
+        // Gandalf ataca con hechizo a Gimli
+        gandalf.WizardAttackWithSpell(gimli, rayo);
+        Console.WriteLine($"{gandalf.Name} ataca a {gimli.Name} con Rayo!");
+        Console.WriteLine($"Vida de {gimli.Name} después del ataque: {gimli.AmountLife}");
         
-        // Crear hechizos y libro de hechizos
-        Spell fireball = new Spell("Bola de fuego", 30);
-        Spell ice = new Spell("Hielo", 15);
-        SpellBook spellBook = new SpellBook();
-
-        Console.WriteLine("\n=== Hechizos en el libro ===\n");
-        Console.WriteLine($"1. {fireball.SpellName} (Poder {fireball.Poder})");
-        Console.WriteLine($"2. {ice.SpellName} (Poder {ice.Poder})");
-
-        Console.WriteLine("\nFin de la simulación.\n");
+        //Legolas ataca con un arco a Gimli
+        gimli.DwarfElf(legolas);
+        Console.WriteLine($"{legolas.Name} ataca a {gimli.Name} con arco!");
+        Console.WriteLine($"Vida de {gimli.Name} después del ataque: {gimli.AmountLife}");
+        
     }
 }

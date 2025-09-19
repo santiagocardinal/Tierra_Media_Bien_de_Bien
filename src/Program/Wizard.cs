@@ -118,4 +118,28 @@ public class Wizard
             this.AmountLife -= item.AttackValue;
         }
     }
+    public void WizardAttackWithSpell(Elf elf, Spell spell)
+    {
+        if (this.SpellBook.Spell.Contains(spell))
+        {
+            elf.AmountLife -= spell.Poder;
+        }
+    }
+
+    public void WizardAttackWithSpell(Dwarf dwarf, Spell spell)
+    {
+        if (this.SpellBook.Spell.Contains(spell))
+        {
+            dwarf.AmountLife -= spell.Poder;
+        }
+    }
+
+    public void WizardAttackWithSpell(Wizard wizard, Spell spell)
+    {
+        if (this.SpellBook.Spell.Contains(spell))
+        {
+            wizard.AmountLife -= spell.Poder;
+        }
+    }
 }
+
