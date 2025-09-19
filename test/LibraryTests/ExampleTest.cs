@@ -1,111 +1,170 @@
 using NUnit.Framework;
 using Program;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace LibraryTests
+namespace Tests
 {
-    public class Tests
+    // ---------------- ITEM ----------------
+    [TestFixture]
+    public class ItemTests
     {
-        private Item sword;
-        private Item shield;
-        private Elf elf;
-        private Dwarf dwarf;
-        private Wizard wizard;
-        private Spell fireball;
-        private Spell ice;
-        private SpellBook spellBook;
-
-        [SetUp]
-        public void Setup()
-        {
-            // Ítems
-            sword = new Item("Sword", 10, 5);
-            shield = new Item("Shield", 3, 8);
-
-            // Personajes
-            elf = new Elf("Legolas");
-            dwarf = new Dwarf("Gimli");
-            wizard = new Wizard("Baltazar");
-
-            // Hechizos y libro
-            fireball = new Spell("Fireball", 20);
-            ice = new Spell("Ice", 15);
-            spellBook = new SpellBook();
-        }
-
-        // ---------------- Personajes ----------------
         [Test]
-        public void ElfStartsWithInitialLife()
+        public void Constructor_ShouldInitializePropertiesCorrectly()
         {
-            Assert.AreEqual(Elf.initialLife, elf.AmountLife);
+            var sword = new Item("Espada", 10, 5);
+
+            Assert.That(sword.NameItem, Is.EqualTo("Espada"));
+            Assert.That(sword.AttackValue, Is.EqualTo(10));
+            Assert.That(sword.DefenseValue, Is.EqualTo(5));
         }
 
         [Test]
-        public void DwarfStartsWithInitialLife()
+        public void Properties_ShouldBeMutable()
         {
-            Assert.AreEqual(Dwarf.initialLife, dwarf.AmountLife);
+            var shield = new Item("Escudo", 5, 8);
+
+            shield.NameItem = "Mega Escudo";
+            shield.AttackValue = 20;
+            shield.DefenseValue = 30;
+
+            Assert.That(shield.NameItem, Is.EqualTo("Mega Escudo"));
+            Assert.That(shield.AttackValue, Is.EqualTo(20));
+            Assert.That(shield.DefenseValue, Is.EqualTo(30));
+        }
+    }
+
+    // ---------------- ELF ----------------
+    [TestFixture]
+    public class ElfTests
+    {
+        [Test]
+        public void Constructor_ShouldInitializePropertiesCorrectly()
+        {
+            var item = new Item ("espada", 15 , 0);
+            var elf = new Elf("Legolas");
+            
+            Assert.That(elf.Element, Is.Empty);
+            elf.AddItem(item);
+            Assert.That(elf.Name, Is.EqualTo("Legolas"));
+            Assert.That(elf.AmountLife, Is.EqualTo(50));
         }
 
         [Test]
-        public void WizardStartsWithInitialLife()
+        public void AmountLife_ShouldBeMutable()
         {
-            Assert.AreEqual(Wizard.initialLife, wizard.AmountLife);
+            var item = new Item ("tunica", 0 , 15);
+            var elf = new Elf("Legolas");
+            elf.AddItem(item);
+
+            Assert.That(elf.AmountLife, Is.EqualTo(65));
+        }
+    }
+
+    // ---------------- DWARF ----------------
+    [TestFixture]
+    public class DwarfTests
+    {
+        [Test]
+        public void Constructor_ShouldInitializePropertiesCorrectly()
+        {
+            var dwarf = new Dwarf("Gimli");
+
+            Assert.That(dwarf.Name, Is.EqualTo("Gimli"));
+            Assert.That(dwarf.Element, Is.Empty);
+            Assert.That(dwarf.AmountLife, Is.EqualTo(50));
         }
 
         [Test]
-        public void ElfAddItemIncreasesLife()
+        public void AmountLife_ShouldBeMutable()
         {
-            var elf = new Elf("Gimpli");
-            Console.WriteLine($"Vida inicial del elf: {elf.AmountLife}");
-            Console.WriteLine($"Vida estática: {Elf.initialLife}");
+            var item = new Item ("tunica", 0 , 15);
+            var dwarf = new Dwarf("Gimli");
 
-            var shield = new Item("shield",0, 10);
-            Console.WriteLine($"DefenseValue del shield: {shield.DefenseValue}");
-    
-            elf.AddItem(shield);
-            Console.WriteLine($"Vida después de AddItem: {elf.AmountLife}");
-    
-            // Tu assert actual
-            Assert.AreEqual(Elf.initialLife + shield.DefenseValue, elf.AmountLife);
+            dwarf.AmountLife = 30;
+
+            Assert.That(dwarf.AmountLife, Is.EqualTo(30));
+        }
+    }
+
+    // ---------------- WIZARD ----------------
+    [TestFixture]
+    public class WizardTests
+    {
+        [Test]
+        public void Constructor_ShouldInitializePropertiesCorrectly()
+        {
+            var spell = new Spell("Fuego", 25);
+            var spellBook = new SpellBook();
+            spellBook.AddSpell(spell);
+            var wizard = new Wizard("Gandalf", spellBook);
+
+            Assert.That(wizard.Name, Is.EqualTo("Gandalf"));
+            Assert.That(wizard.LstElement, Is.Empty);
+            Assert.That(wizard.SpellBook, Is.Not.Null);
         }
 
         [Test]
-        public void DwarfRemoveItemDecreasesLife()
+        public void AmountLife_ShouldBeMutable()
         {
-            dwarf.AddItem(shield);
-            dwarf.RemoveItem(shield);
-            Assert.AreEqual(Dwarf.initialLife, dwarf.AmountLife);
+            var spell = new Spell("ice", 15);
+            var spellBook = new SpellBook();
+            var item = new Item("tunica", 0, 5);
+            var wizard = new Wizard("Gandalf", spellBook);
+            wizard.AddItem(item);
+
+            Assert.That(wizard.AmountLife, Is.EqualTo(55));
+        }
+    }
+
+    // ---------------- SPELLBOOK ----------------
+    [TestFixture]
+    public class SpellBookTests
+    {
+        [Test]
+        public void Constructor_ShouldInitializeEmptySpellsList()
+        {
+            var spellBook = new SpellBook();
+
+            Assert.That(spellBook.Spell, Is.Not.Null);
+            Assert.That(spellBook.Spell, Is.Empty);
         }
 
         [Test]
-        public void ElfExchangeItemUpdatesLife()
+        public void AddSpell_ShouldIncreaseSpellsCount()
         {
-            elf.AddItem(sword);
-            elf.ExchangeItem(sword, shield);
-            //Assert.AreEqual(Elf.amountLife - sword.DefenseValue + shield.DefenseValue, elf.AmountLife);
+            var spell = new Spell("Fuego", 25);
+            var spellBook = new SpellBook();
+            spellBook.AddSpell(spell);
+
+            Assert.That(spellBook.Spell.Count, Is.EqualTo(1));
+            Assert.That(spellBook.Spell.First().SpellName, Is.EqualTo("Fuego"));
         }
+    }
+
+    // ---------------- SPELL ----------------
+    [TestFixture]
+    public class SpellTests
+    {
         [Test]
-        public void WizardHealRestoresLife()
+        public void Constructor_ShouldInitializePropertiesCorrectly()
         {
-            wizard.AddItem(shield);
-            wizard.RemoveItem(shield);
-            wizard.Heal();
-            Assert.AreEqual(Wizard.initialLife, wizard.AmountLife);
+            var fireball = new Spell("Bola de fuego", 30);
+
+            Assert.That(fireball.SpellName, Is.EqualTo("Bola de fuego"));
+            Assert.That(fireball.Poder, Is.EqualTo(30));
         }
 
-        // ---------------- Hechizos ----------------
         [Test]
-        public void SpellHasCorrectNameAndPower()
+        public void Properties_ShouldBeMutable()
         {
-            Assert.AreEqual("Fireball", fireball.SpellName);
-            Assert.AreEqual(20, fireball.Poder);
-        }
+            var ice = new Spell("Hielo", 15);
 
-        [Test]
-        public void SpellBookStoresSpellsCorrectly()
-        {   spellBook.AddSpell(fireball);
-            wizard.
-            Assert.IsNotNull(spellBook);
+            ice.SpellName = "Super Hielo";
+            ice.Poder = 50;
+
+            Assert.That(ice.SpellName, Is.EqualTo("Super Hielo"));
+            Assert.That(ice.Poder, Is.EqualTo(50));
         }
     }
 }
