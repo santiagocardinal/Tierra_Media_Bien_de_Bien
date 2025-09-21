@@ -15,7 +15,7 @@ public class MainProgram
         SpellBook libroHechizos = new SpellBook();
         libroHechizos.AddSpell(rayo);
 
-        // Crear personajes
+        // Crear personajes y asignarle items
         Wizard gandalf = new Wizard("Gandalf", libroHechizos);
         gandalf.AddItem(escudo);
 
@@ -25,7 +25,7 @@ public class MainProgram
         Dwarf gimli = new Dwarf("Gimli");
         gimli.AddItem(espada);
 
-        // Mostrar vida inicial
+        // Mostrar vida inicial de los personajes creados
         Console.WriteLine($"Vida de {legolas.Name}: {legolas.AmountLife}");
         Console.WriteLine($"Vida de {gimli.Name}: {gimli.AmountLife}");
         Console.WriteLine($"Vida de {gandalf.Name}: {gandalf.AmountLife}");
