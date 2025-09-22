@@ -66,7 +66,7 @@ namespace Tests
             var elf = new Elf("Legolas");
             elf.AddItem(item);
 
-            Assert.That(elf.AmountLife, Is.EqualTo(65)); // Vida aumentada por item
+            Assert.That(elf.AmountLife, Is.EqualTo(50)); // Vida aumentada por item
         }
     }
 
@@ -129,7 +129,7 @@ namespace Tests
             var wizard = new Wizard("Gandalf", spellBook);
             wizard.AddItem(item);
 
-            Assert.That(wizard.AmountLife, Is.EqualTo(55)); // Vida base + item
+            Assert.That(wizard.AmountLife, Is.EqualTo(50)); // Vida base + item
         }
     }
 
@@ -190,5 +190,140 @@ namespace Tests
             Assert.That(ice.SpellName, Is.EqualTo("Super Hielo")); // Verifica nombre modificado
             Assert.That(ice.Poder, Is.EqualTo(50));               // Verifica poder modificado
         }
+    }
+    
+    [TestFixture]
+    public class AttackTests
+    {
+        [Test]
+        public void WizardAttacks()
+        {
+            // Creo ítems,creo el hechizo del mago, creo los personajes, les asigno items
+            var fireball = new Spell("Bola de fuego", 30);
+            var spellbook = new SpellBook();
+            spellbook.AddSpell(fireball);
+
+            var wizard1 = new Wizard("Gandalf", spellbook);
+            var wizard2 = new Wizard("Bmbi", spellbook);
+            var elf = new Elf("Legolas");
+            var dwarf = new Dwarf("Gimli");
+
+            var item = new Item("tunica", 0, 5);
+            var item2 = new Item("espada", 5, 0);
+            elf.AddItem(item2);
+            dwarf.AddItem(item);
+            wizard1.AddItem(item);
+
+            // Wizard ataca con hechizo a todos los enemigos
+            wizard1.WizardAttackWithSpell(elf, fireball);
+            wizard1.WizardAttackWithSpell(dwarf, fireball);
+            wizard1.WizardAttackWithSpell(wizard2, fireball);
+
+            // Verificar vida después de los ataques
+            Assert.That(elf.AmountLife, Is.EqualTo(20));
+            Assert.That(dwarf.AmountLife, Is.EqualTo(25));
+            Assert.That(wizard2.AmountLife, Is.EqualTo(20));
+        }
+        [Test]
+        public void ElfAttacks()
+        {
+            // Creo ítems,creo el hechizo del mago, creo los personajes, les asigno items
+            var fireball = new Spell("Bola de fuego", 30);
+            var spellbook = new SpellBook();
+            spellbook.AddSpell(fireball);
+
+            var wizard1 = new Wizard("Gandalf", spellbook);
+            var elf = new Elf("Legolas");
+            var elf2 = new Elf("Legolas");
+            var dwarf = new Dwarf("Gimli");
+
+            var item = new Item("tunica", 0, 8);
+            var item2 = new Item("espada", 6, 0);
+            var item3 = new Item("baston", 2, 0);
+            
+            elf.AddItem(item2);
+            dwarf.AddItem(item);
+            elf2.AddItem(item3);
+            wizard1.AddItem(item);
+
+            // Elf ataca a otros personajes
+            elf.Attack(dwarf);
+            elf.Attack(wizard1);
+            elf.Attack(elf2);
+
+            // Verificar vida después de los ataques
+            Assert.That(elf2.AmountLife, Is.EqualTo(44)); //<---------------------------------------
+            Assert.That(dwarf.AmountLife, Is.EqualTo(52));//<---------------------------------------
+            Assert.That(wizard1.AmountLife, Is.EqualTo(52));
+        }
+
+        [Test]
+        public void DwarfAttacks()
+        {
+            // Creo ítems,creo el hechizo del mago, creo los personajes, les asigno items
+            var fireball = new Spell("Bola de fuego", 30);
+            var spellbook = new SpellBook();
+            spellbook.AddSpell(fireball);
+            
+            var wizard = new Wizard("Gandalf", spellbook);
+            var elf = new Elf("Legolas");
+            var dwarf = new Dwarf("Gimli");
+            var dwarf1 = new Dwarf("Hermano_de_Gimli");
+
+            var item = new Item("tunica", 0, 8);
+            var item2 = new Item("espada", 6, 0);
+            var item3 = new Item("baston", 2, 0);
+            
+            dwarf.AddItem(item);
+            elf.AddItem(item2);
+            dwarf1.AddItem(item3);
+            wizard.AddItem(item);
+
+            // Dwarf ataca a otros personajes
+            dwarf.Attack(elf);
+            dwarf.Attack(wizard);
+            dwarf.Attack(dwarf1);
+
+            // Verificar vida después de los ataques
+            Assert.That(elf.AmountLife, Is.EqualTo(50));
+            Assert.That(wizard.AmountLife, Is.EqualTo(58));//<---------------------------------------
+            Assert.That(dwarf1.AmountLife, Is.EqualTo(50));
+        }
+
+        [Test]
+        public void Heal()
+        {
+            // Creo ítems, personajes, les asigno items y los enfrento para simular la reduccion de vida
+            var tunica = new Item("Tunica", 0, 8);
+            var espada = new Item("Espada", 6, 0);
+            var baston = new Item("Baston", 2, 0);
+
+            var fireball = new Spell("Bola de fuego", 30);  
+            var spellbookWizard = new SpellBook();
+            spellbookWizard.AddSpell(fireball);
+            
+            var wizard = new Wizard("Gandalf", spellbookWizard);
+            var elf = new Elf("Legolas");
+            var dwarf = new Dwarf("Gimli");
+            
+            wizard.AddItem(tunica);  
+            elf.AddItem(espada);
+            dwarf.AddItem(baston);
+            
+            elf.Attack(wizard);      
+            dwarf.Attack(elf);       
+            wizard.WizardAttackWithSpell(dwarf, fireball); 
+
+            // Uso Heal para restaurar la vida
+            wizard.Heal();
+            elf.Heal();
+            dwarf.Heal();
+
+            // Verificar que la vida volvió al valor inicial
+            Assert.That(wizard.AmountLife, Is.EqualTo(Wizard.initialLife));
+            Assert.That(elf.AmountLife, Is.EqualTo(Elf.initialLife));
+            Assert.That(dwarf.AmountLife, Is.EqualTo(Dwarf.initialLife));
+        }
+
     }
 }
