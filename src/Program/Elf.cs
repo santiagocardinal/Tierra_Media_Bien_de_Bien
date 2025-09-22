@@ -74,12 +74,27 @@ public class Elf
             this.AmountLife -= item.AttackValue;
         }
     }
+    
     public void Attack(Wizard wizard)
     {
+        int defense = 0;
+        
         foreach (var item in wizard.LstElement)
+            
+            
         {
-            this.AmountLife -= item.AttackValue;
+            
+            defense += item.DefenseValue;
         }
+        int damage = 0;
+        
+        foreach (var item in this.Element)
+            
+        {
+            damage += item.AttackValue;
+        }
+        
+        wizard.AmountLife = AmountLife + defense - damage;
     }
     public void Attack(Elf elf)
     {

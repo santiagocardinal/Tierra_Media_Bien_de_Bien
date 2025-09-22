@@ -95,10 +95,26 @@ public class Wizard
     
     public void Attack(Elf elf)
     {
+        int defense = 0;
+        
         foreach (var item in elf.Element)
+            
+            
         {
-            this.AmountLife -= item.AttackValue;
+            
+            defense += item.DefenseValue;
         }
+        int damage = 0;
+        
+        foreach (var item in elf.Element)
+            
+            
+        {
+            damage += item.AttackValue;
+        }
+        
+        
+        elf.AmountLife = AmountLife + defense - damage;
     }
 
     public void Attack(Dwarf dwarf)
@@ -118,9 +134,18 @@ public class Wizard
     }
     public void WizardAttackWithSpell(Elf elf, Spell spell)
     {
-        if (this.SpellBook.Spell.Contains(spell))
+        if (this.SpellBook.Spel)
         {
-            elf.AmountLife -= spell.Poder;
+            int defense = 0;
+            foreach (var item in elf.Element)
+            {
+                defense += item.DefenseValue;
+            }
+
+            int damage = spell.Poder - defense;
+            if (damage < 0) damage = 0; // nunca hace "curar" al enemigo
+
+            elf.AmountLife -= damage;
         }
     }
 
@@ -128,7 +153,16 @@ public class Wizard
     {
         if (this.SpellBook.Spell.Contains(spell))
         {
-            dwarf.AmountLife -= spell.Poder;
+            int defense = 0;
+            foreach (var item in dwarf.Element)
+            {
+                defense += item.DefenseValue;
+            }
+
+            int damage = spell.Poder - defense;
+            if (damage < 0) damage = 0; // nunca hace "curar" al enemigo
+
+            dwarf.AmountLife -= damage;
         }
     }
 
@@ -136,7 +170,17 @@ public class Wizard
     {
         if (this.SpellBook.Spell.Contains(spell))
         {
-            wizard.AmountLife -= spell.Poder;
+            int defense = 0;
+            foreach (var item in wizard.LstElement) // CORRECCIÓN
+            {
+                defense += item.DefenseValue;
+            }
+
+            int damage = spell.Poder - defense;
+            if (damage < 0) damage = 0; // nunca hace "curar" al enemigo
+
+            wizard.AmountLife -= damage; // <- punto y coma agregado
+            if (wizard.AmountLife < 0) wizard.AmountLife = 0; // opcional, para no bajar de 0
         }
     }
 }

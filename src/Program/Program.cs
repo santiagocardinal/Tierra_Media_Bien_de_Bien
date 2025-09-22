@@ -41,7 +41,34 @@ public class MainProgram
         Console.WriteLine("______________________________________________________________");
         Console.WriteLine("CASOS EN EL QUE EL MAGO ATACA");
         Console.WriteLine("______________________________________________________________");
+        
+        //while (gandalf.AmountLife > 0 && legolas.AmountLife > 0)
+        //{
+            // Turno de Gandalf
+            Console.WriteLine($"{gandalf.Name} ataca con Rayo a {legolas.Name}");
+            gandalf.WizardAttackWithSpell(legolas, rayo);
+            Console.WriteLine($"Vida de {legolas.Name}: {legolas.AmountLife}\n");
 
+            if (legolas.AmountLife <= 0)
+            {
+                Console.WriteLine($"\n{legolas.Name} ha muerto!");
+                Console.WriteLine($"{gandalf.Name} gana con {gandalf.AmountLife} de vida restante.\n");
+              //  break;
+            }
+
+            // Turno de Legolas
+            Console.WriteLine($"{legolas.Name} contraataca con su Arco!");
+            legolas.Attack(gandalf);
+            Console.WriteLine($"Vida de {gandalf.Name}: {gandalf.AmountLife}\n");
+
+            if (gandalf.AmountLife <= 0)
+            {
+                Console.WriteLine($"\n{gandalf.Name} ha muerto!");
+                Console.WriteLine($"{legolas.Name} gana con {legolas.AmountLife} de vida restante.\n");
+              //  break;
+            }
+        //}
+       /* 
         Console.WriteLine($"\nGandalf ataca con hechizo a Legolas\n");
         gandalf.WizardAttackWithSpell(legolas, rayo);
         Console.WriteLine($"{gandalf.Name} ataca a {legolas.Name} con su poder de Rayo!");
@@ -56,9 +83,10 @@ public class MainProgram
         Item baston = new Item("Baston", 6, 4);
         Wizard merlin = new Wizard("Merlin", libroHechizos);
         merlin.AddItem(baston);
-        merlin.WizardAttackWithSpell(merlin, chorro_de_agua);
+        gandalf.WizardAttackWithSpell(merlin, chorro_de_agua);
         Console.WriteLine($"{gandalf.Name} ataca a {marzee.Name} con Rayo!");
         Console.WriteLine($"Vida de {merlin.Name} después del ataque: {merlin.AmountLife}");
+      
         
         Console.WriteLine("______________________________________________________________");
         Console.WriteLine("CASOS EN EL QUE EL ELFO ATACA");
@@ -106,7 +134,7 @@ public class MainProgram
         Console.WriteLine($"Vida de {llezram.Name}: {llezram.AmountLife}");
         Console.WriteLine($"{marzee.Name} ataca a {llezram.Name} con espada!");
         Console.WriteLine($"Vida de {llezram.Name} después del ataque: {llezram.AmountLife}");
-        
+        */
         
     }
 }
