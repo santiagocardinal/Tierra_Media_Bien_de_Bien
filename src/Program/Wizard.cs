@@ -73,68 +73,56 @@ public class Wizard
         this.LstElement[indice] = e2;
     }
 
-   /*public void GetAttack(Item element)
-    {
-        this.AmountLife-=element.AttackValue;
-    }
-
-    public void GetDefense(Item defense)
-    {
-        this.AmountLife+=defense.DefenseValue;
-    }*/
-
     public void Heal()
     {
         this.AmountLife = initialLife;
     }
 
-    /*public void AddSpell(SpellBook book)
+    public int GetDefense(List<Item> defense)
     {
-        
-    }*/
+        int defensa =0;
+        foreach (var element in defense)
+        {
+            defensa += element.DefenseValue;
+        }
+        return defensa;
+    }
+    public int GetAttack(List<Item> defense)
+    {
+        int defensa =0;
+        foreach (var element in defense)
+        {
+            defensa += element.AttackValue;
+        }
+        return defensa;
+    }
     
     public void Attack(Elf elf)
     {
-        int defense = 0;
+        int defense = GetDefense(elf.Element);
+        int attack = GetAttack(elf.Element);
         
-        foreach (var item in elf.Element)
-            
-            
-        {
-            
-            defense += item.DefenseValue;
-        }
-        int damage = 0;
-        
-        foreach (var item in elf.Element)
-            
-            
-        {
-            damage += item.AttackValue;
-        }
-        
-        
-        elf.AmountLife = AmountLife + defense - damage;
+        elf.AmountLife -= (attack - defense);
     }
 
     public void Attack(Dwarf dwarf)
     {
-        foreach (var item in dwarf.Element)
-        {
-            this.AmountLife -= item.AttackValue;
-        }
+        int defense = GetDefense(dwarf.Element);
+        int attack = GetAttack(dwarf.Element);
+        
+        dwarf.AmountLife -= (attack - defense);
     }
 
     public void Attack(Wizard wizard)
     {
-        foreach (var item in wizard.LstElement)
-        {
-            this.AmountLife -= item.AttackValue;
-        }
+        int defense = GetDefense(wizard.LstElement);
+        int attack = GetAttack(wizard.LstElement);
+        
+        wizard.AmountLife -= (attack - defense);
     }
     public void WizardAttackWithSpell(Elf elf, Spell spell)
     {
-        if (this.SpellBook.Spel)
+        if (this.SpellBook.Spell.Contains(spell))
         {
             int defense = 0;
             foreach (var item in elf.Element)

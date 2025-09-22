@@ -57,26 +57,44 @@ public class Dwarf
     {
         this.AmountLife = initialLife;
     }
-
+    
+    public int GetDefense(List<Item> defense)
+    {
+        int defensa =0;
+        foreach (var element in defense)
+        {
+            defensa += element.DefenseValue;
+        }
+        return defensa;
+    }
+    public int GetAttack(List<Item> defense)
+    {
+        int defensa =0;
+        foreach (var element in defense)
+        {
+            defensa += element.AttackValue;
+        }
+        return defensa;
+    }
     public void Attack(Elf elf)
     {
-        foreach (var item in elf.Element)
-        {
-            this.AmountLife -= item.AttackValue;
-        }
+        int defense = GetDefense(elf.Element);
+        int attack = GetAttack(elf.Element);
+        
+        elf.AmountLife -= (attack - defense);
     }
     public void Attack(Wizard wizard)
     {
-        foreach (var item in wizard.LstElement)
-        {
-            this.AmountLife -= item.AttackValue;
-        }
+        int defense = GetDefense(wizard.LstElement);
+        int attack = GetAttack(wizard.LstElement);
+        
+        wizard.AmountLife -= (attack - defense);
     }
     public void Attack(Dwarf dwarf)
     {
-        foreach (var item in dwarf.Element)
-        {
-            this.AmountLife -= item.AttackValue;
-        }
+        int defense = GetDefense(dwarf.Element);
+        int attack = GetAttack(dwarf.Element);
+        
+        dwarf.AmountLife -= (attack - defense);
     }
 }

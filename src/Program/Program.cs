@@ -1,4 +1,6 @@
-﻿namespace Program;
+﻿using System.ComponentModel;
+
+namespace Program;
 public class MainProgram
 {
     public static void Main(string[] args)
@@ -16,8 +18,8 @@ public class MainProgram
         // Crear SpellBook
         SpellBook libroHechizos = new SpellBook();
         libroHechizos.AddSpell(rayo);
-        libroHechizos = new SpellBook();
-        libroHechizos.AddSpell(chorro_de_agua);
+        SpellBook libroHechizos2 = new SpellBook();
+        libroHechizos2.AddSpell(chorro_de_agua);
         
         // Crear personajes y asignarle items
         Wizard gandalf = new Wizard("Gandalf", libroHechizos);
@@ -41,34 +43,42 @@ public class MainProgram
         Console.WriteLine("______________________________________________________________");
         Console.WriteLine("CASOS EN EL QUE EL MAGO ATACA");
         Console.WriteLine("______________________________________________________________");
-        
-        //while (gandalf.AmountLife > 0 && legolas.AmountLife > 0)
-        //{
-            // Turno de Gandalf
-            Console.WriteLine($"{gandalf.Name} ataca con Rayo a {legolas.Name}");
-            gandalf.WizardAttackWithSpell(legolas, rayo);
-            Console.WriteLine($"Vida de {legolas.Name}: {legolas.AmountLife}\n");
 
+        while (gandalf.AmountLife > 0 && legolas.AmountLife > 0)
+        {
+            // Turno de Gandalf
+            if (gandalf.AmountLife > 0 && legolas.AmountLife > 0)
+            {
+                Console.WriteLine($"{gandalf.Name} ataca con Rayo a {legolas.Name}");
+                gandalf.WizardAttackWithSpell(legolas, rayo);
+                Console.WriteLine($"Vida de {legolas.Name}: {legolas.AmountLife}\n");
+            }
+
+            // Chequear si Legolas murió después del ataque
             if (legolas.AmountLife <= 0)
             {
                 Console.WriteLine($"\n{legolas.Name} ha muerto!");
                 Console.WriteLine($"{gandalf.Name} gana con {gandalf.AmountLife} de vida restante.\n");
-              //  break;
+                continue; // salta el turno de Legolas
             }
 
             // Turno de Legolas
-            Console.WriteLine($"{legolas.Name} contraataca con su Arco!");
-            legolas.Attack(gandalf);
-            Console.WriteLine($"Vida de {gandalf.Name}: {gandalf.AmountLife}\n");
+            if (legolas.AmountLife > 0 && gandalf.AmountLife > 0)
+            {
+                Console.WriteLine($"{legolas.Name} contraataca con su Arco!");
+                legolas.Attack(gandalf);
+                Console.WriteLine($"Vida de {gandalf.Name}: {gandalf.AmountLife}\n");
+            }
 
+            // Chequear si Gandalf murió después del contraataque
             if (gandalf.AmountLife <= 0)
             {
                 Console.WriteLine($"\n{gandalf.Name} ha muerto!");
                 Console.WriteLine($"{legolas.Name} gana con {legolas.AmountLife} de vida restante.\n");
-              //  break;
             }
-        //}
-       /* 
+        }
+
+        
         Console.WriteLine($"\nGandalf ataca con hechizo a Legolas\n");
         gandalf.WizardAttackWithSpell(legolas, rayo);
         Console.WriteLine($"{gandalf.Name} ataca a {legolas.Name} con su poder de Rayo!");
@@ -134,7 +144,7 @@ public class MainProgram
         Console.WriteLine($"Vida de {llezram.Name}: {llezram.AmountLife}");
         Console.WriteLine($"{marzee.Name} ataca a {llezram.Name} con espada!");
         Console.WriteLine($"Vida de {llezram.Name} después del ataque: {llezram.AmountLife}");
-        */
+        
         
     }
 }

@@ -56,10 +56,24 @@ public class Elf
         }
     }
     
-    //public void GetDefense(Element defense)
-    //{
-     //   this.AmountLife += defense.Defense;
-    //}
+    public int GetDefense(List<Item> defense)
+    {
+        int defensa =0;
+        foreach (var element in defense)
+        {
+            defensa += element.DefenseValue;
+        }
+        return defensa;
+    }
+    public int GetAttack(List<Item> defense)
+    {
+        int defensa =0;
+        foreach (var element in defense)
+        {
+            defensa += element.AttackValue;
+        }
+        return defensa;
+    }
 
     public void Heal()
     {
@@ -69,38 +83,24 @@ public class Elf
 
     public void Attack(Dwarf dwarf)
     {
-        foreach (var item in dwarf.Element)
-        {
-            this.AmountLife -= item.AttackValue;
-        }
+        int defense = GetDefense(dwarf.Element);
+        int attack = GetAttack(dwarf.Element);
+        
+        dwarf.AmountLife -= (attack - defense);
     }
     
     public void Attack(Wizard wizard)
     {
-        int defense = 0;
+        int defense = GetDefense(wizard.LstElement);
+        int attack = GetAttack(wizard.LstElement);
         
-        foreach (var item in wizard.LstElement)
-            
-            
-        {
-            
-            defense += item.DefenseValue;
-        }
-        int damage = 0;
-        
-        foreach (var item in this.Element)
-            
-        {
-            damage += item.AttackValue;
-        }
-        
-        wizard.AmountLife = AmountLife + defense - damage;
+        wizard.AmountLife -= (attack - defense);
     }
     public void Attack(Elf elf)
     {
-        foreach (var item in elf.Element)
-        {
-            this.AmountLife -= item.AttackValue;
-        }
+        int defense = GetDefense(elf.Element);
+        int attack = GetAttack(elf.Element);
+        
+        elf.AmountLife -= (attack - defense);
     }
 }
