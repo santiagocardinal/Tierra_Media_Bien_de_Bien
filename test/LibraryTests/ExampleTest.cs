@@ -324,6 +324,5 @@ namespace Tests
             Assert.That(elf.AmountLife, Is.EqualTo(Elf.initialLife));
             Assert.That(dwarf.AmountLife, Is.EqualTo(Dwarf.initialLife));
         }
-
     }
 }

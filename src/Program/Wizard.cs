@@ -29,12 +29,7 @@ public class Wizard
         set { amountLife = value; }
     }
 
-    /*public int InitialLife
-    {
-        get { return InitialLife; }
-        set { InitialLife = value; }
-    }
-*/
+    
     public SpellBook SpellBook
     {
         get { return spellBook; }
@@ -78,45 +73,45 @@ public class Wizard
         this.AmountLife = initialLife;
     }
 
-    public int GetDefense(List<Item> defense)
+    public int GetDefense()
     {
         int defensa =0;
-        foreach (var element in defense)
+        foreach (var element in this.LstElement)
         {
             defensa += element.DefenseValue;
         }
         return defensa;
     }
-    public int GetAttack(List<Item> defense)
+    public int GetAttack()
     {
-        int defensa =0;
-        foreach (var element in defense)
+        int ataque = 0;
+        foreach (var element in this.LstElement)
         {
-            defensa += element.AttackValue;
+            ataque += element.AttackValue;
         }
-        return defensa;
+        return ataque;
     }
     
     public void Attack(Elf elf)
     {
-        int defense = GetDefense(elf.Element);
-        int attack = GetAttack(elf.Element);
+        int defense = elf.GetDefense();
+        int attack = this.GetAttack();
         
         elf.AmountLife -= (attack - defense);
     }
 
     public void Attack(Dwarf dwarf)
     {
-        int defense = GetDefense(dwarf.Element);
-        int attack = GetAttack(dwarf.Element);
+        int defense = dwarf.GetDefense();
+        int attack = this.GetAttack();
         
         dwarf.AmountLife -= (attack - defense);
     }
 
     public void Attack(Wizard wizard)
     {
-        int defense = GetDefense(wizard.LstElement);
-        int attack = GetAttack(wizard.LstElement);
+        int defense = wizard.GetDefense();
+        int attack = this.GetAttack();
         
         wizard.AmountLife -= (attack - defense);
     }
@@ -124,11 +119,7 @@ public class Wizard
     {
         if (this.SpellBook.Spell.Contains(spell))
         {
-            int defense = 0;
-            foreach (var item in elf.Element)
-            {
-                defense += item.DefenseValue;
-            }
+            int defense = elf.GetDefense();
 
             int damage = spell.Poder - defense;
             if (damage < 0) damage = 0; // nunca hace "curar" al enemigo
@@ -141,11 +132,7 @@ public class Wizard
     {
         if (this.SpellBook.Spell.Contains(spell))
         {
-            int defense = 0;
-            foreach (var item in dwarf.Element)
-            {
-                defense += item.DefenseValue;
-            }
+            int defense = dwarf.GetDefense();
 
             int damage = spell.Poder - defense;
             if (damage < 0) damage = 0; // nunca hace "curar" al enemigo
@@ -158,17 +145,13 @@ public class Wizard
     {
         if (this.SpellBook.Spell.Contains(spell))
         {
-            int defense = 0;
-            foreach (var item in wizard.LstElement) // CORRECCIÓN
-            {
-                defense += item.DefenseValue;
-            }
+            int defense = wizard.GetDefense();
 
             int damage = spell.Poder - defense;
-            if (damage < 0) damage = 0; // nunca hace "curar" al enemigo
+            if (damage < 0) damage = 0; 
 
-            wizard.AmountLife -= damage; // <- punto y coma agregado
-            if (wizard.AmountLife < 0) wizard.AmountLife = 0; // opcional, para no bajar de 0
+            wizard.AmountLife -= damage; 
+            if (wizard.AmountLife < 0) wizard.AmountLife = 0; 
         }
     }
 }

@@ -77,8 +77,8 @@ public class MainProgram
                 Console.WriteLine($"{legolas.Name} gana con {legolas.AmountLife} de vida restante.\n");
             }
         }
-
         
+       /* 
         Console.WriteLine($"\nGandalf ataca con hechizo a Legolas\n");
         gandalf.WizardAttackWithSpell(legolas, rayo);
         Console.WriteLine($"{gandalf.Name} ataca a {legolas.Name} con su poder de Rayo!");
@@ -144,7 +144,7 @@ public class MainProgram
         Console.WriteLine($"Vida de {llezram.Name}: {llezram.AmountLife}");
         Console.WriteLine($"{marzee.Name} ataca a {llezram.Name} con espada!");
         Console.WriteLine($"Vida de {llezram.Name} después del ataque: {llezram.AmountLife}");
-        
+        */
         
     }
 }
