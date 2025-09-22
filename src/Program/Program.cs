@@ -10,11 +10,15 @@ public class MainProgram
 
         // Crear hechizos
         Spell rayo = new Spell("Rayo", 20);
+        Spell chorro_de_agua = new Spell("Chorro de agua", 10);
+
 
         // Crear SpellBook
         SpellBook libroHechizos = new SpellBook();
         libroHechizos.AddSpell(rayo);
-
+        libroHechizos = new SpellBook();
+        libroHechizos.AddSpell(chorro_de_agua);
+        
         // Crear personajes y asignarle items
         Wizard gandalf = new Wizard("Gandalf", libroHechizos);
         gandalf.AddItem(escudo);
@@ -22,28 +26,87 @@ public class MainProgram
         Elf legolas = new Elf("Legolas");
         legolas.AddItem(arco);
 
-        Dwarf gimli = new Dwarf("Gimli");
-        gimli.AddItem(espada);
+        Dwarf marzee = new Dwarf("Marzee");
+        marzee.AddItem(espada);
 
+        Console.WriteLine("______________________________________________________________");
+        
         // Mostrar vida inicial de los personajes creados
         Console.WriteLine($"Vida de {legolas.Name}: {legolas.AmountLife}");
-        Console.WriteLine($"Vida de {gimli.Name}: {gimli.AmountLife}");
+        Console.WriteLine($"Vida de {marzee.Name}: {marzee.AmountLife}");
         Console.WriteLine($"Vida de {gandalf.Name}: {gandalf.AmountLife}");
+        
+        Console.WriteLine("______________________________________________________________");
+        
+        Console.WriteLine("______________________________________________________________");
+        Console.WriteLine("CASOS EN EL QUE EL MAGO ATACA");
+        Console.WriteLine("______________________________________________________________");
 
-        // Gandalf ataca con hechizo a Legolas
+        Console.WriteLine($"\nGandalf ataca con hechizo a Legolas\n");
         gandalf.WizardAttackWithSpell(legolas, rayo);
         Console.WriteLine($"{gandalf.Name} ataca a {legolas.Name} con su poder de Rayo!");
         Console.WriteLine($"Vida de {legolas.Name} después del ataque: {legolas.AmountLife}");
 
-        // Gandalf ataca con hechizo a Gimli
-        gandalf.WizardAttackWithSpell(gimli, rayo);
-        Console.WriteLine($"{gandalf.Name} ataca a {gimli.Name} con Rayo!");
-        Console.WriteLine($"Vida de {gimli.Name} después del ataque: {gimli.AmountLife}");
+        Console.WriteLine($"\nGandalf ataca con hechizo a Marzell\n");
+        gandalf.WizardAttackWithSpell(marzee, rayo);
+        Console.WriteLine($"{gandalf.Name} ataca a {marzee.Name} con Rayo!");
+        Console.WriteLine($"Vida de {marzee.Name} después del ataque: {marzee.AmountLife}");
+
+        Console.WriteLine($"\nGandalf ataca a alguien de su especie (Merlin)\n");
+        Item baston = new Item("Baston", 6, 4);
+        Wizard merlin = new Wizard("Merlin", libroHechizos);
+        merlin.AddItem(baston);
+        merlin.WizardAttackWithSpell(merlin, chorro_de_agua);
+        Console.WriteLine($"{gandalf.Name} ataca a {marzee.Name} con Rayo!");
+        Console.WriteLine($"Vida de {merlin.Name} después del ataque: {merlin.AmountLife}");
         
-        //Legolas ataca con un arco a Gimli
-        gimli.DwarfElf(legolas);
-        Console.WriteLine($"{legolas.Name} ataca a {gimli.Name} con arco!");
-        Console.WriteLine($"Vida de {gimli.Name} después del ataque: {gimli.AmountLife}");
+        Console.WriteLine("______________________________________________________________");
+        Console.WriteLine("CASOS EN EL QUE EL ELFO ATACA");
+        Console.WriteLine("______________________________________________________________");
+
+        Console.WriteLine($"\nLegolas ataca con un arco a Marzee\n");
+        marzee.Attack(legolas);
+        Console.WriteLine($"{legolas.Name} ataca a {marzee.Name} con arco!");
+        Console.WriteLine($"Vida de {marzee.Name} después del ataque: {marzee.AmountLife}");
+
+        Console.WriteLine($"\nLegolas ataca a Gandalf\n");
+        gandalf.Attack(legolas);
+        Console.WriteLine($"{legolas.Name} ataca a {gandalf.Name} con arco!");
+        Console.WriteLine($"Vida de {gandalf.Name} después del ataque: {gandalf.AmountLife}");
+
+        Console.WriteLine($"\nLegolas ataca a alguien de su misma especie (Pomodoro)\n");
+        Item lanza = new Item("Lanza", 5, 0);
+        Elf pomodoro = new Elf("Pomodoro");
+        pomodoro.AddItem(lanza);
+        pomodoro.Attack(legolas);
+        Console.WriteLine($"Vida de {pomodoro.Name}: {pomodoro.AmountLife}");
+        Console.WriteLine($"{legolas.Name} ataca a {pomodoro.Name} con espada!");
+        Console.WriteLine($"Vida de {pomodoro.Name} después del ataque: {pomodoro.AmountLife}");
+        
+        Console.WriteLine("______________________________________________________________");
+        Console.WriteLine("CASOS EN EL QUE EL ENANO ATACA");
+        Console.WriteLine("______________________________________________________________");
+
+
+        Console.WriteLine("\nMarzee ataca con una espada a Legolas\n");
+        legolas.Attack(marzee);
+        Console.WriteLine($"{marzee.Name} ataca a {legolas.Name} con espada!");
+        Console.WriteLine($"Vida de {legolas.Name} después del ataque: {legolas.AmountLife}");
+        
+        Console.WriteLine($"\nMarzee ataca con una espada a Gandalf\n");
+        gandalf.Attack(marzee);
+        Console.WriteLine($"{marzee.Name} ataca a {gandalf.Name} con espada!");
+        Console.WriteLine($"Vida de {gandalf.Name} después del ataque: {gandalf.AmountLife}");
+        
+        Console.WriteLine($"\nMarzee ataca a alguien de su misma especie (Llezram)\n");
+        Item piedras = new Item("Piedras", 2, 0);
+        Dwarf llezram = new Dwarf("Llezram");
+        llezram.AddItem(piedras);
+        llezram.Attack(marzee);
+        Console.WriteLine($"Vida de {llezram.Name}: {llezram.AmountLife}");
+        Console.WriteLine($"{marzee.Name} ataca a {llezram.Name} con espada!");
+        Console.WriteLine($"Vida de {llezram.Name} después del ataque: {llezram.AmountLife}");
+        
         
     }
 }

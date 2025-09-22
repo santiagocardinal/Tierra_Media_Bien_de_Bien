@@ -52,13 +52,11 @@ public class Wizard
     public void AddItem(Item element)
     {
         this.LstElement.Add(element);
-        this.AmountLife += element.DefenseValue;
     }
 
     public void RemoveItem(Item element)
     {
         this.LstElement.Remove(element);
-        this.AmountLife -= element.DefenseValue;
     }
 
     public void ExchangeItem(Item e1, Item e2)
@@ -75,7 +73,7 @@ public class Wizard
         this.LstElement[indice] = e2;
     }
 
-    public void GetAttack(Item element)
+   /*public void GetAttack(Item element)
     {
         this.AmountLife-=element.AttackValue;
     }
@@ -83,7 +81,7 @@ public class Wizard
     public void GetDefense(Item defense)
     {
         this.AmountLife+=defense.DefenseValue;
-    }
+    }*/
 
     public void Heal()
     {
@@ -95,7 +93,7 @@ public class Wizard
         
     }*/
     
-    public void WizardElf(Elf elf)
+    public void Attack(Elf elf)
     {
         foreach (var item in elf.Element)
         {
@@ -103,7 +101,7 @@ public class Wizard
         }
     }
 
-    public void WizardDwarf(Dwarf dwarf)
+    public void Attack(Dwarf dwarf)
     {
         foreach (var item in dwarf.Element)
         {
@@ -111,7 +109,7 @@ public class Wizard
         }
     }
 
-    public void WizardWizard(Wizard wizard)
+    public void Attack(Wizard wizard)
     {
         foreach (var item in wizard.LstElement)
         {
