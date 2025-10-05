@@ -13,22 +13,3 @@ public class Sword: IAttackItem, IDefenseItem
         this.DefenseValue = defenseValue;
     }
 }
-
-/*
- 
- 
-// Implementación de IItem
-    public string Name { get; set; }
-    public int Value { get; set; }
-
-    // Ataque
-    private int attackValue;
-    public int GetAttackValue => attackValue;  // propiedad de solo lectura
-
-    // Constructor
-    public Sword(string name, int value, int attackValue)
-    {
-        this.Name = name;
-        this.Value = value;
-        this.attackValue = attackValue;
-    }*/

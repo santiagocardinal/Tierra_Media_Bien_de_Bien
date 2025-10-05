@@ -15,9 +15,3 @@ public interface ICharacter : IItem
     int GetDefense();
 }
 
-/*
-+AddItem (item : Item)
-+RemoveItem (item : Item)
-+Attack (opponent : T)
-+Heal()
-*/
