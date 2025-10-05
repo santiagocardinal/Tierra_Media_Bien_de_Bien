@@ -1,6 +1,6 @@
 namespace Program;
 
-public interface ICharacter<T>
+public interface ICharacter : IItem
 {
     string Name { get; }
     List<IItem> Element { get; set; }
@@ -8,10 +8,11 @@ public interface ICharacter<T>
     int InitialLife { get; set; }
 
     void AddItem(IItem item);
-    void RemoveItem(IItem item);
-    void ExchangeItem(IItem item);
-    void Attack(T opponent, IItem item);
+    void RemoveItem(IItem e1);
+    void ExchangeItem(IItem e1, IItem e2);
+    void Attack(ICharacter opponent, IItem item);
     void Heal();
+    int GetDefense();
 }
 
 /*

@@ -1,31 +1,18 @@
 ﻿namespace Program;
 
-public class Bow  : IAttackValue
+public class Bow  : IAttackItem
 {
     // Implementación de IItem
     public string Name { get; set; }
-    public int Value { get; set; }
-
-    private int attackValue;
+    public int AttackValue { get; set; }
     
-    public int AttackValue
-    {
-        get { return attackValue; }
-        set { attackValue = value; }
-    }
 
-    public Bow(string name, int value, int attackValue, int defenseValue)
+    public Bow(string name, int attackValue)
     {
         this.Name = name;
-        this.Value = value;
         this.AttackValue = attackValue;
     }
     
-    public int GetAttackValue() //ME SALTABA CONQUE NO HABIA IMPLEMENTADO LA INTERFAZ PORQUE EN IATTACKVALUE PUSIMOS UN {GET; } Y NO VA UNA PROPIEDAD AHI, EN INTERFACES SOLO METODOS!
-    {
-        return this.AttackValue;
-    }
-
 }
 
 /* private int attackValue;

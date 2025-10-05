@@ -3,11 +3,8 @@ using System.Collections.Generic;
 
 namespace Program
 {
-    public class Dwarf : ICharacter<Dwarf>, IInventory<IItem> //LLAMO A LAS INTEFACES ICharacter y le pongo en T el tipo Dwarf, tambien llamo a IInventory que viene con la interfaz IItem implementada
+    public class Dwarf : ICharacter
     {
-        // Atributos privados
-        private List<IItem> items = new List<IItem>();
-
         // Aca menciono las ropiedades de ICharacter que ya habiamos escrito
         public string Name { get; private set; }
         public List<IItem> Element { get; set; }
@@ -23,28 +20,74 @@ namespace Program
             Element = new List<IItem>();
         }
 
-        // Implemento lo de la interfaz IInventory<IItem>
+        // Implemento lo de la interfaz IItem>
         public void AddItem(IItem item)
         {
-            items.Add(item);
-            Element.Add(item); // sincronizamos ambas listas ESTO LO HIZO CHAT NO ME SALIA :(
+            Element.Add(item); 
         }
 
         public void RemoveItem(IItem item)
         {
-            items.Remove(item);
             Element.Remove(item);
         }
 
-        public List<IItem> GetItems()
+        
+        // Implementación de ICharacter<Dwarf>
+        public void ExchangeItem(IItem e1, IItem e2)
         {
-            return new List<IItem>(items);
+            // ejemplo simple: si ya existe lo quita, si no lo agrega
+            /*if (items.Contains(item))
+                RemoveItem(item);
+            else
+                AddItem(item);*/
+            
+            int indice = 0;
+            foreach (var i in this.Element)
+            {
+                if (i == e1)
+                {
+                    indice = Element.IndexOf(i);
+                }
+            }
+
+            this.Element[indice] = e2;
         }
 
-        public int GetAttackValue()
+        public void Attack(ICharacter opponent, IItem item)
+        {
+            int vida = opponent.AmountLife + opponent.GetDefense();
+            if (item is IAttackItem attackItem)
+            {
+                vida -= attackItem.AttackValue;
+            }
+            opponent.AmountLife = vida;
+        }
+
+        public void Heal()
+        {
+            AmountLife = InitialLife;
+        }
+        
+
+        public int GetDefense()
+        {
+            int defensa = 0;
+            foreach (var item in Element)
+            {
+                if (item is IDefenseItem defenseItem)
+                {
+                    defensa += defenseItem.DefenseValue;
+                }
+            }
+            return defensa;
+        }
+    }
+}
+
+/*public int GetAttackValue()
         {
             int total = 0;
-            foreach (var item in items)
+            foreach (var item in Element)
             {
                 if (item is IAttackValue attackItem)
                 {
@@ -52,54 +95,20 @@ namespace Program
                 }
             }
             return total;
-        }
+        }*/
 
-        public int GetDefenseValue()
+/*public int GetDefenseValue()
+{
+    int total = 0;
+    foreach (var item in Element)
+    {
+        if (item is IDefenseValue defenseItem)
         {
-            int total = 0;
-            foreach (var item in items)
-            {
-                if (item is IDefenseValue defenseItem)
-                {
-                    total += defenseItem.GetDefenseValue();
-                }
-            }
-            return total;
-        }
-
-        // Implementación de ICharacter<Dwarf>
-        public void ExchangeItem(IItem item)
-        {
-            // ejemplo simple: si ya existe lo quita, si no lo agrega
-            if (items.Contains(item))
-                RemoveItem(item);
-            else
-                AddItem(item);
-        }
-
-        public void Attack(Dwarf opponent, IItem item)
-        {
-            if (items.Contains(item) && item is IAttackValue attackValue)
-            {
-                int damage = attackValue.GetAttackValue() - opponent.GetDefenseValue();
-                if (damage < 0) damage = 0;
-                opponent.ReceiveDamage(damage);
-            }
-        }
-
-        public void Heal()
-        {
-            AmountLife = InitialLife;
-        }
-
-        public void ReceiveDamage(int damage)
-        {
-            AmountLife -= damage;
-            if (AmountLife < 0)
-                AmountLife = 0;
+            total += defenseItem.GetDefenseValue();
         }
     }
-}
+    return total;
+}*/
 
 /*namespace Program;
 public class Dwarf

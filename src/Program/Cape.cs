@@ -1,31 +1,17 @@
 ﻿namespace Program;
-public class Cape : IDefenseValue
+public class Cape : IDefenseItem
 {
     // Implementación de IItem
     public string Name { get; set; }
-    public int Value { get; set; }
+    public int DefenseValue { get; set; }
 
-    // Propiedad DefenseValue
-    private int defenseValue;
 
-    public int DefenseValue
-    {
-        get { return defenseValue; }
-        set { defenseValue = value; }
-    }
-
-    public Cape(string name, int value, int defenseValue)
+    public Cape(string name, int defenseValue)
     {
         this.Name = name;
-        this.Value = value;
         this.DefenseValue = defenseValue;
     }
-
-    // Método GetAttackValue
-    public int GetDefenseValue()
-    {
-        return this.DefenseValue;
-    }
+    
 }
 /*
 public class Cape

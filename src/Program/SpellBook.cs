@@ -1,7 +1,8 @@
 namespace Program
 {
-    public class SpellBook
+    public class SpellBook : IMagicItem
     {
+        public string Name { get; }
         private int AmountSpell { get; set; }
         private List<Spell> spell;
 
@@ -11,8 +12,9 @@ namespace Program
             set{spell = value; }
         }
 
-        public SpellBook()
+        public SpellBook(string name)
         {
+            this.Name = name;
             this.Spell = new List<Spell>();
         }
         public void AddSpell(Spell spell)
@@ -20,5 +22,7 @@ namespace Program
             this.Spell.Add(spell);
             AmountSpell ++;
         }
+
+        
     }
 }

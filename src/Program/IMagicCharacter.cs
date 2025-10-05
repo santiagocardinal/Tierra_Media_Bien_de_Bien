@@ -1,19 +1,6 @@
 namespace Program;
 
-public interface  IMagicCharacter<T> : ICharacter<T>
+public interface  IMagicCharacter : ICharacter
 {
-    string Name { get; }
-    List<IItem> Element { get; set; }
-    int AmountLife { get; set; }
-    int InitialLife { get; set; }
-
-    void AddItem(IItem item);
-    void RemoveItem(IItem item);
-    void ExchangeItem(IItem item);
-    void Attack(T opponent, IItem item);
-    void Heal();
-    void WizardAttackWithSpell(Spell spell,ICharacter<T> atacado);
+    void WizardAttackWithSpell(Spell spell,ICharacter atacado);
 }
-/*
-+ WizardAttackWithSpell(Spell, ICharacter) : void
-*/

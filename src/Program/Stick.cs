@@ -1,24 +1,14 @@
 ﻿namespace Program;
 
-public class Stick
+public class Stick: IAttackItem
 {
-    private int attackValue;
+    public string Name { get; }
+    public int AttackValue { get; set; }
     
-    public int AttackValue
+    public Stick(string name, int attackValue)
     {
-        get { return attackValue; }
-        set { attackValue = value; }
-    }
-    
-    public Stick(int attackValue)
-    {
+        this.Name = name;
         this.AttackValue = attackValue;
     }
-    
-    public int GetAttackValue()
-    {
-        return this.AttackValue;
-    }    
-    
 }
 
