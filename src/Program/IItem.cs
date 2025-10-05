@@ -1,7 +1,10 @@
 namespace Program;
 
-public interface IItem
-{
+public interface IItem 
+{ 
+    string Name { get; }
+}
+    /*
 //List<Item> element;
      void AddItem(IItem item);   //parametro ITEM del tipo IITEM
      void RemoveItem(IItem item);
@@ -37,5 +40,5 @@ public interface IItem
             this.Element[index] = e2;
             
         }
-    }*/
-}
+    }
+}*/

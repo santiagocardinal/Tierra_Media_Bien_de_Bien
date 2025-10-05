@@ -1,6 +1,6 @@
 ﻿namespace Program;
 
-public class Stick: IAttackValue
+public class Stick
 {
     private int attackValue;
     
