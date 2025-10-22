@@ -2,90 +2,61 @@
 
 namespace Program;
 
-public class Wizard : IMagicCharacter
+public class Wizard : GoodGuy
 {
-    public string Name { get; set; }
-    public List<IItem> Element { get; set; }
-    public int AmountLife { get; set; }
-    public int InitialLife { get; set; }
-
-    public Wizard(string name, int amountLife, int initialLife)
+    public Wizard(string name, int amountLife, int initialLife, int vp) : base(name, amountLife, initialLife, vp)
     {
-        Name = name;
-        AmountLife = amountLife;
-        InitialLife = initialLife;
-        Element = new List<IItem>();
     }
-
-    public void AddItem(IItem item)
+    public void Attack(BadGuy badGuy, Spell spell)
     {
-        Element.Add(item);
-    }
-
-    public void RemoveItem(IItem item)
-    {
-        Element.Remove(item);
-    }
-
-    public void ExchangeItem(IItem e1, IItem e2)
-    {
-        int indice = 0;
-        foreach (var i in this.Element)
+        // Verificar si el BadGuy está vivo antes de atacar
+        if (badGuy.AmountLife <= 0)
         {
-            if (i == e1)
+            return;
+        }
+        
+        int damage = 0;
+        
+        // Obtener el daño del hechizo
+        if (spell is IAttackItem attackItem)
+        {
+            damage = attackItem.AttackValue;
+        }
+        
+        // Calcular daño total considerando la defensa del oponente
+        int totalDamage = damage - badGuy.GetDefense();
+        
+        if (totalDamage > 0)
+        {
+            badGuy.ReceiveDamage(totalDamage);
+        }
+        
+        // Verificar si el BadGuy murió después del ataque
+        if (badGuy.AmountLife <= 0)
+        {
+            // El Wizard gana los VP del BadGuy derrotado
+            this.VP += badGuy.VP;
+            
+            // Si tiene más de 5 VP, se cura completamente
+            if (this.VP > 5)
             {
-                indice = Element.IndexOf(i);
+                this.Heal();
             }
         }
-
-        this.Element[indice] = e2;
     }
-
-    public void Attack(ICharacter opponent, IItem item)
+    
+    /*
+    public void Attack(BadGuy badGuy, Spell spell)
     {
-        int vida = opponent.AmountLife + opponent.GetDefense();
-        if (item is IAttackItem attackItem)
+        int vida = badGuy.AmountLife + badGuy.GetDefense();
+        if (spell is IAttackItem attackItem)
         {
             vida -= attackItem.AttackValue;
         }
 
-        opponent.AmountLife = vida;
+        badGuy.AmountLife = vida;
     }
-
-    public void Heal()
-    {
-        this.AmountLife = this.InitialLife;
-    }
-
-    public int GetDefense()
-    {
-        int defensa = 0;
-        foreach (var item in Element)
-        {
-            if (item is IDefenseItem defenseItem)
-            {
-                defensa += defenseItem.DefenseValue;
-            }
-        }
-
-        return defensa;
-    }
-
-    public void WizardAttackWithSpell(Spell spell, ICharacter atacado)
-    {
-        SpellBook spellBook = null;
-
-        foreach (var item in Element)
-        {
-            if (item is SpellBook book)
-            {
-                spellBook = book;
-            }
-        }
-
-        int vidaConDefensa = atacado.AmountLife + atacado.GetDefense();
-        atacado.AmountLife = vidaConDefensa - spell.Poder;
-    }
+    */
 }
 
 
