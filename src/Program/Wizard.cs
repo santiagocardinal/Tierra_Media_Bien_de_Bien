@@ -7,41 +7,50 @@ public class Wizard : GoodGuy
     public Wizard(string name, int amountLife, int initialLife, int vp) : base(name, amountLife, initialLife, vp)
     {
     }
+
+    public override void Attack()
+    {
+        throw new NotImplementedException();
+    }
+    
     public void Attack(BadGuy badGuy, Spell spell)
     {
         // Verificar si el BadGuy está vivo antes de atacar
-        if (badGuy.AmountLife <= 0)
+        /*if (badGuy.AmountLife <= 0)
         {
             return;
-        }
+        }*/
         
         int damage = 0;
         
         // Obtener el daño del hechizo
-        if (spell is IAttackItem attackItem)
+        if (spell is Attack attack)
         {
-            damage = attackItem.AttackValue;
-        }
-        
-        // Calcular daño total considerando la defensa del oponente
-        int totalDamage = damage - badGuy.GetDefense();
-        
-        if (totalDamage > 0)
-        {
-            badGuy.ReceiveDamage(totalDamage);
-        }
-        
-        // Verificar si el BadGuy murió después del ataque
-        if (badGuy.AmountLife <= 0)
-        {
-            // El Wizard gana los VP del BadGuy derrotado
-            this.VP += badGuy.VP;
+            damage = attack.AttackValue;
             
-            // Si tiene más de 5 VP, se cura completamente
-            if (this.VP > 5)
+            int totalDamage = damage - badGuy.GetDefense();
+        
+            if (totalDamage > 0)
             {
-                this.Heal();
+                badGuy.ReceiveDamage(totalDamage);
             }
+            
+            // Verificar si el BadGuy murió después del ataque
+            if (badGuy.AmountLife <= 0)
+            {
+                // El Wizard gana los VP del BadGuy derrotado
+                this.VP += badGuy.VP;
+            
+                // Si tiene más de 5 VP, se cura completamente
+                if (this.VP > 5)
+                {
+                    this.Heal();
+                }
+            }
+        }
+        else if (spell is Defense defense)
+        {
+            this.AmountLife+= defense.DefenseValue;
         }
     }
     

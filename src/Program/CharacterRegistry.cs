@@ -25,13 +25,13 @@ public class CharacterRegistry
 
     public void ArrangeCharacters(Character character)
     {
-        if (Character is GoodGuy)
+        if (character is GoodGuy good)
         {
-            this.GoodGuys.Add(character);
+            this.GoodGuys.Add(good);
         }
-        else
+        else if (character is BadGuy bad)
         {
-            this.BadGuys.Add(character);
+            this.BadGuys.Add(bad);
         }
     }
 }

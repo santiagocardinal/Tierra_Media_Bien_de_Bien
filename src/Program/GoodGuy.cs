@@ -14,13 +14,19 @@ public class GoodGuy : Character
         this.VP += vp;
     }
 
+    public override void Attack()
+    {
+        throw new NotImplementedException();
+    }
+
+    // Sobrecarga: nuevo método con misma firma base + parámetros diferentes
     public void Attack(BadGuy badGuy)
     {
         // Verificar si el BadGuy está vivo antes de atacar
-        if (badGuy.AmountLife <= 0)
+        /*if (badGuy.AmountLife <= 0)
         {
             return;
-        }
+        }*/
         
         int damage = 0;
         
@@ -53,4 +59,7 @@ public class GoodGuy : Character
             }
         }
     }
+    
+
+    
 }

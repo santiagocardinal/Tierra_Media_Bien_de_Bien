@@ -40,15 +40,7 @@ public abstract class Character
         this.Element[indice] = e2; 
     }
 
-    public void Attack(ICharacter opponent, IItem item)
-    {
-        int vida = opponent.AmountLife + opponent.GetDefense();
-        if (item is IAttackItem attackItem)
-        {
-            vida -= attackItem.AttackValue;
-        }
-        opponent.AmountLife = vida;
-    }
+    public abstract void Attack();
 
     public void Heal()
     {
@@ -73,5 +65,13 @@ public abstract class Character
         AmountLife -= damage;
         if (AmountLife < 0)
             AmountLife = 0;
+    }
+
+    public bool IsAlive()
+    {
+        if (AmountLife > 0) 
+            return true;
+        
+        return false;
     }
 }

@@ -14,13 +14,17 @@ public class BadGuy : Character
         this.VP += vp;
     }
 
+    public override void Attack()
+    {
+        throw new NotImplementedException();
+    }
     public void Attack(GoodGuy goodGuy)
     {
         // Verificar si el GoodGuy está vivo antes de atacar
-        if (goodGuy.AmountLife <= 0)
+        /*if (goodGuy.AmountLife <= 0)
         {
             return;
-        }
+        }*/
         
         int damage = 0;
         
