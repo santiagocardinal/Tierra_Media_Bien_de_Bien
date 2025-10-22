@@ -1,14 +1,12 @@
 namespace Program
 {
-    public class Spell
+    public abstract class Spell
     {
         public string SpellName { get; set; }
-        public int Poder { get; set; }
-
-        public Spell(string spellName, int poder)
+        
+        public Spell(string spellName)
         {
             this.SpellName = spellName;
-            this.Poder = poder;
         }
     }
 }
