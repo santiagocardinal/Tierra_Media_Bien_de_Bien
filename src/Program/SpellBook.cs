@@ -1,6 +1,6 @@
 namespace Program
 {
-    public class SpellBook : IMagicItem
+    public class SpellBook 
     {
         public string Name { get; }
         private int AmountSpell { get; set; }
