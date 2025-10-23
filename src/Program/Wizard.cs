@@ -2,8 +2,9 @@
 
 namespace Program;
 
-public class Wizard : GoodGuy
+public class Wizard : GoodGuy, IMagicCharacter
 {
+    public SpellBook SpellBook { get; set; }
     public Wizard(string name, int amountLife, int initialLife, int vp) : base(name, amountLife, initialLife, vp)
     {
     }
@@ -66,6 +67,10 @@ public class Wizard : GoodGuy
         badGuy.AmountLife = vida;
     }
     */
+    public void AddSpellBook(SpellBook spellBook)
+    {
+        this.SpellBook = spellBook;
+    }
 }
 
 

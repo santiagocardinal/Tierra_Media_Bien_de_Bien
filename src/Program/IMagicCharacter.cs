@@ -1,6 +1,6 @@
 namespace Program;
 
-public interface  IMagicCharacter : ICharacter
+public interface IMagicCharacter
 {
-    void WizardAttackWithSpell(Spell spell,ICharacter atacado);
+    void AddSpellBook(SpellBook spellBook);
 }

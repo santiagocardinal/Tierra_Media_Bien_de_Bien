@@ -3,29 +3,29 @@ namespace Program;
 public abstract class Character
 {
     public string Name { get; set; }
-    public List<Item> Element { get; set; }  
+    public List<IItem> Element { get; set; }  
     public int AmountLife { get; set; }
     public int InitialLife { get; set; }
 
     public Character(string name, int amountLife, int initialLife)
     {
         this.Name = name;
-        this.Element = new List<Item>();  
+        this.Element = new List<IItem>();  
         this.AmountLife = amountLife;
         this.InitialLife = initialLife;
     }
     
-    public void AddItem(Item item)
+    public void AddItem(IItem item)
     {
         Element.Add(item);  
     }
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(IItem item)
     {
         Element.Remove(item);  
     }
     
-    public void ExchangeItem(Item e1, Item e2)
+    public void ExchangeItem(IItem e1, IItem e2)
     {
         
         int indice = 0;

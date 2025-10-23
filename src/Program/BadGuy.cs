@@ -9,9 +9,11 @@ public class BadGuy : Character
         this.VP = vp;
     }
 
-    public void GiveVp(int vp)
+    public int GiveVp()
     {
-        this.VP += vp;
+        int puntaje = this.VP;
+        this.VP = 0;
+        return puntaje;
     }
 
     public override void Attack()

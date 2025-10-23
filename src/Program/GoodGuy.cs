@@ -8,12 +8,7 @@ public class GoodGuy : Character
     {
         this.VP = vp;
     }
-
-    public void GiveVp(int vp)
-    {
-        this.VP += vp;
-    }
-
+    
     public override void Attack()
     {
         throw new NotImplementedException();
@@ -50,7 +45,7 @@ public class GoodGuy : Character
         if (badGuy.AmountLife <= 0)
         {
             // El GoodGuy gana los VP del BadGuy derrotado
-            this.VP += badGuy.VP;
+            this.VP += badGuy.GiveVp();
             
             // Si tiene más de 5 VP, se cura completamente
             if (this.VP > 5)

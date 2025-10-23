@@ -172,7 +172,7 @@ namespace Tests
         {
             var book = new SpellBook("Ancient Tome");
 
-            Assert.IsInstanceOf<IMagicItem>(book);
+            Assert.IsInstanceOf<IMagicCharacter>(book);
             Assert.IsInstanceOf<IItem>(book);
         }
 
@@ -517,7 +517,7 @@ namespace Tests
         {
             var wizard = new Wizard("Gandalf", 100, 100);
 
-            Assert.IsInstanceOf<IMagicCharacter>(wizard);
+            Assert.IsInstanceOf<IMagicCharacterOld>(wizard);
             Assert.IsInstanceOf<ICharacter>(wizard);
             Assert.IsInstanceOf<IItem>(wizard);
         }
