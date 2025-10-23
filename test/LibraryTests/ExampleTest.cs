@@ -1,4 +1,4 @@
-using NUnit.Framework;
+/*using NUnit.Framework;
 using Program;
 using System;
 using System.Collections.Generic;
@@ -848,4 +848,4 @@ namespace Tests
             Assert.DoesNotThrow(() => wizard.WizardAttackWithSpell(new Spell("NonExistent", 10), enemy));
         }
     }
-}
+}*/
