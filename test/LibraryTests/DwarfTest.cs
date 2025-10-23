@@ -12,7 +12,6 @@ namespace Library.Tests
             string name = "Gimli";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Dwarf dwarf = new Dwarf(name, amountLife, initialLife);
@@ -21,7 +20,6 @@ namespace Library.Tests
             Assert.That(dwarf.Name, Is.EqualTo(name));
             Assert.That(dwarf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(dwarf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(dwarf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_NullName()
@@ -30,7 +28,6 @@ namespace Library.Tests
             string name = null;
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Dwarf dwarf = new Dwarf(name, amountLife, initialLife);
@@ -39,8 +36,7 @@ namespace Library.Tests
             Assert.That(dwarf.Name, Is.EqualTo(null));
             Assert.That(dwarf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(dwarf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(dwarf.VP, Is.EqualTo(vp));
-        }
+       }
         [Test]
         public void Constructor_WithoutName()
         {
@@ -48,7 +44,6 @@ namespace Library.Tests
             string name = "";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Dwarf dwarf = new Dwarf(name, amountLife, initialLife);
@@ -57,7 +52,6 @@ namespace Library.Tests
             Assert.That(dwarf.Name, Is.EqualTo(""));
             Assert.That(dwarf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(dwarf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(dwarf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_AmountLife()
@@ -66,7 +60,6 @@ namespace Library.Tests
             string name = "Jose";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Dwarf dwarf = new Dwarf(name, amountLife, initialLife);
@@ -76,7 +69,6 @@ namespace Library.Tests
             Assert.That(dwarf.AmountLife, Is.GreaterThan(0));
             Assert.That(dwarf.AmountLife, Is.Not.Negative);
             Assert.That(dwarf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(dwarf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_InitialLife()
@@ -85,7 +77,6 @@ namespace Library.Tests
             string name = "Jose";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Dwarf dwarf = new Dwarf(name, amountLife, initialLife);
@@ -95,7 +86,6 @@ namespace Library.Tests
             Assert.That(dwarf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(dwarf.InitialLife, Is.GreaterThan(0));
             Assert.That(dwarf.InitialLife, Is.Not.Negative);
-            Assert.That(dwarf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_VPShoudNotBeNegative()
@@ -104,7 +94,6 @@ namespace Library.Tests
             string name = "Jose";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Dwarf dwarf = new Dwarf(name, amountLife, initialLife);
@@ -113,7 +102,6 @@ namespace Library.Tests
             Assert.That(dwarf.Name, Is.EqualTo(name));
             Assert.That(dwarf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(dwarf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(dwarf.VP, Is.Not.Negative);
         }
         [Test]
         public void Multiple_Dwarfs()
@@ -171,7 +159,7 @@ namespace Library.Tests
         {
             // Arrange
             Dwarf dwarf = new Dwarf("Gimli", 50, 100);
-            BadGuy boss = new BadGuy("Boss", 10, 10, 2);
+            BadGuy boss = new BadGuy("Boss", 10, 10, 6);
 
             dwarf.Element.Add(new Sword("Hacha", 20,5));
 

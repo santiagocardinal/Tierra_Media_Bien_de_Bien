@@ -6,7 +6,7 @@ namespace Program.Tests
     public class WizardTests
     {
         [Test]
-        public void AddSpellBook_ShouldAssignSpellBook()
+        public void AddSpellBook_AssignSpellBook()
         {
             // Arrange
             var wizard = new Wizard("Merlin", 100, 100);
@@ -20,7 +20,7 @@ namespace Program.Tests
         }
 
         [Test]
-        public void Attack_WithAttackSpell_ShouldReduceBadGuyLife()
+        public void Attack_ReduceBadGuyLife()
         {
             // Arrange
             var wizard = new Wizard("Gandalf", 100, 100);
@@ -35,7 +35,7 @@ namespace Program.Tests
         }
 
         [Test]
-        public void Attack_WithDefenseSpell_ShouldIncreaseWizardLife()
+        public void Attack_IncreaseWizardLife()
         {
             // Arrange
             var wizard = new Wizard("Gandalf", 50, 100);
@@ -50,7 +50,7 @@ namespace Program.Tests
         }
 
         [Test]
-        public void Attack_ShouldGiveVP_WhenBadGuyDies()
+        public void GiveVP_WhenBadGuyDies()
         {
             // Arrange
             var wizard = new Wizard("Gandalf", 100, 100);
@@ -66,7 +66,7 @@ namespace Program.Tests
         }
 
         [Test]
-        public void Attack_ShouldHeal_WhenVPExceedsFive()
+        public void ShouldHeal_WhenVPExceedsFive()
         {
             // Arrange
             var wizard = new Wizard("Gandalf", 60, 100); 
@@ -87,7 +87,6 @@ namespace Program.Tests
             var wizard = new Wizard("Gandalf", 100, 100);
             var badGuy = new BadGuy("Troll", 50, 50, 2);
 
-            // Mock de defensa alta
             badGuy.AddItem(new Cape("Capa de invisibilidad", 100)); 
             var spell = new Attack("Weak Spell", 10);
 
@@ -99,3 +98,4 @@ namespace Program.Tests
         }
     }
 }
+

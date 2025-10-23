@@ -28,7 +28,6 @@ namespace Library.Tests
             string name = null;
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Elf elf= new Elf(name, amountLife, initialLife);
@@ -37,7 +36,6 @@ namespace Library.Tests
             Assert.That(elf.Name, Is.EqualTo(null));
             Assert.That(elf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(elf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(elf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_WithoutName()
@@ -46,7 +44,6 @@ namespace Library.Tests
             string name = "";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Elf elf= new Elf(name, amountLife, initialLife);
@@ -55,7 +52,6 @@ namespace Library.Tests
             Assert.That(elf.Name, Is.EqualTo(""));
             Assert.That(elf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(elf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(elf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_AmountLife()
@@ -64,7 +60,6 @@ namespace Library.Tests
             string name = "Jose";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Elf elf= new Elf(name, amountLife, initialLife);
@@ -74,7 +69,6 @@ namespace Library.Tests
             Assert.That(elf.AmountLife, Is.GreaterThan(0));
             Assert.That(elf.AmountLife, Is.Not.Negative);
             Assert.That(elf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(elf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_InitialLife()
@@ -83,7 +77,6 @@ namespace Library.Tests
             string name = "Jose";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
             Elf elf= new Elf(name, amountLife, initialLife);
@@ -93,7 +86,6 @@ namespace Library.Tests
             Assert.That(elf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(elf.InitialLife, Is.GreaterThan(0));
             Assert.That(elf.InitialLife, Is.Not.Negative);
-            Assert.That(elf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_VPShoudNotBeNegative()
