@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Program;
+namespace Library;
 
 public class Witch : BadGuy, IMagicCharacter
 {

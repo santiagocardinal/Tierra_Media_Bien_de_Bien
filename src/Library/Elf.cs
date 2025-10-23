@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Pipes;
 
-namespace Program
+namespace Library
 {
     public class Elf : GoodGuy
     {

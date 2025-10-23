@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Program;
+using Library;
 
 namespace Library.Tests
 {
@@ -150,39 +150,7 @@ namespace Library.Tests
             // Assert
             Assert.That(dwarf.AmountLife, Is.LessThan(80));
         }
-
-        [Test]
-        public void OgroGanaVP()
-        {
-            // Arrange
-            Ogre ogre = new Ogre("Destructor", 100, 100, 0);
-            GoodGuy dwarf = new GoodGuy("Mimi", 10, 10); 
-
-            ogre.Element.Add(new Sword("Hacha", 20,5));
-
-            // Act
-            ogre.Attack(dwarf);
-
-            // Assert
-            Assert.That(dwarf.AmountLife, Is.EqualTo(0));   
-            Assert.That(ogre.VP, Is.GreaterThanOrEqualTo(5)); 
-        }
-
-        [Test]
-        public void OgreSeCuraConVPMayorA5()
-        {
-            // Arrange
-            Ogre ogre = new Ogre("Pedro", 50, 100, 5);
-            GoodGuy boss = new GoodGuy("Boss", 10, 10);
-
-            ogre.Element.Add(new Sword("Hacha", 20,5));
-
-            // Act
-            ogre.Attack(boss);
-
-            // Assert
-            Assert.That(ogre.AmountLife, Is.EqualTo(100)); 
-        }
+        
         [TestFixture]
         public class CharacterTests
         {

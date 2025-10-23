@@ -1,4 +1,4 @@
-﻿namespace Program;
+﻿namespace Library;
 
 public class Defense : Spell
 {

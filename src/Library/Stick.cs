@@ -1,16 +1,14 @@
-﻿namespace Program;
+﻿namespace Library;
 
-public class Bow  : IAttackItem
+public class Stick: IAttackItem
 {
-    // Implementación de IItem
     public string Name { get; set; }
     public int AttackValue { get; set; }
     
-
-    public Bow(string name, int attackValue)
+    public Stick(string name, int attackValue)
     {
         this.Name = name;
         this.AttackValue = attackValue;
     }
-    
 }
+

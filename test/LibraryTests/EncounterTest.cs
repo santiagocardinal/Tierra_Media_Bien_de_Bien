@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using Program;
-using System.Collections.Generic;
+using Library;
+
+namespace Library.Tests;
 
 [TestFixture]
 public class EncounterTestsGlobal

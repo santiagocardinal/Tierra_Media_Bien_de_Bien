@@ -1,6 +1,7 @@
-using Program;
+using NUnit.Framework;
+using Library;
 
-namespace LibraryTests;
+namespace Library.Tests;
 
 public class SwordTest
 {

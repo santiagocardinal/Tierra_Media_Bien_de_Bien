@@ -1,7 +1,7 @@
-namespace LibraryTests;
-
-using Program;
 using NUnit.Framework;
+using Library;
+
+namespace Library.Tests;
 
 [TestFixture]
 public class AttackTest

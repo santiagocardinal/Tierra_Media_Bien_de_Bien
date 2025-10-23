@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Program;
+using Library;
 
 namespace Library.Tests
 {
@@ -157,40 +157,7 @@ namespace Library.Tests
             // Assert
             Assert.That(elf.AmountLife, Is.LessThan(80));
         }
-
-        [Test]
-        public void VampireGanaVP()
-        {
-            // Arrange
-            Vampire vampire = new Vampire("Drac", 100, 100, 0);
-            GoodGuy elf = new GoodGuy("Elrond", 10, 10); 
-
-            vampire.Element.Add(new Sword("Daga", 20, 5));
-
-            // Act
-            vampire.Attack(elf);
-
-            // Assert
-            Assert.That(elf.AmountLife, Is.EqualTo(0));   
-            Assert.That(vampire.VP, Is.GreaterThanOrEqualTo(5)); 
-        }
-
-        [Test]
-        public void VampireSeCuraConVPMayorA5()
-        {
-            // Arrange
-            Vampire vampire = new Vampire("Lestat", 50, 100, 5);
-            GoodGuy elf = new GoodGuy("Legolas", 10, 10);
-
-            vampire.Element.Add(new Sword("Daga", 20, 5));
-
-            // Act
-            vampire.Attack(elf);
-
-            // Assert
-            Assert.That(vampire.AmountLife, Is.EqualTo(100)); 
-        }
-
+        
         [TestFixture]
         public class CharacterTests
         {

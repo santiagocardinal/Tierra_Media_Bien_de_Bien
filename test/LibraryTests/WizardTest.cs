@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using Library;
 
-namespace Program.Tests
+namespace Library.Tests
 {
     [TestFixture]
     public class WizardTests
