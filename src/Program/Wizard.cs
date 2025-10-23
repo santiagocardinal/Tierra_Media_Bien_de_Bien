@@ -5,7 +5,7 @@ namespace Program;
 public class Wizard : GoodGuy, IMagicCharacter
 {
     public SpellBook SpellBook { get; set; }
-    public Wizard(string name, int amountLife, int initialLife, int vp) : base(name, amountLife, initialLife, vp)
+    public Wizard(string name, int amountLife, int initialLife) : base(name, amountLife, initialLife)
     {
     }
 

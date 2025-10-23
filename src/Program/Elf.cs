@@ -6,7 +6,7 @@ namespace Program
 {
     public class Elf : GoodGuy
     {
-        public Elf(string name, int amountLife, int initialLife, int vp) : base(name, amountLife, initialLife, vp)
+        public Elf(string name, int amountLife, int initialLife) : base(name, amountLife, initialLife)
         {
         }
     }
