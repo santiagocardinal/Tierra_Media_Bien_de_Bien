@@ -126,4 +126,40 @@ public class EncounterTestsGlobal
         Assert.AreEqual(1, registry.GoodGuys.Count);
         Assert.AreEqual(0, registry.BadGuys.Count);
     }
+    
+    [Test]
+    public void Encounter_VillainsDefeated_AllHeroesWin()
+    {
+        // Limpiar registry y agregar los personajes para este escenario
+        registry = new CharacterRegistry();
+        registry.ArrangeCharacters(heroElf);     // héroe
+        registry.ArrangeCharacters(heroDwarf);   // héroe
+        registry.ArrangeCharacters(villainOrc);  // villano
+        registry.ArrangeCharacters(villainVamp); // villano
+
+        Encounter encounter = new Encounter(registry);
+        encounter.DoEncounter();
+
+        // Verificar que todos los héroes murieron
+        Assert.AreEqual(2, registry.GoodGuys.Count);
+        Assert.IsTrue(registry.BadGuys.Count == 0);
+    }
+
+    [Test]
+    public void Encounter_HeroesDefeated_AllVillainsWin()
+    {
+        // Limpiar registry y agregar los personajes para este escenario
+        registry = new CharacterRegistry();
+        registry.ArrangeCharacters(heroDwarf);   // héroe
+        registry.ArrangeCharacters(villainWitch); // villano
+        registry.ArrangeCharacters(villainVamp); // villano
+
+        Encounter encounter = new Encounter(registry);
+        encounter.DoEncounter();
+
+        // Verificar que todos los villanos murieron
+        Assert.AreEqual(1, registry.BadGuys.Count);
+        Assert.IsTrue(registry.GoodGuys.Count == 0);
+    }
+
 }
