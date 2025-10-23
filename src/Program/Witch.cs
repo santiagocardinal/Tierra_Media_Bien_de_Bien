@@ -14,7 +14,7 @@ public class Witch : BadGuy, IMagicCharacter
         throw new NotImplementedException();
     }
     
-    public void Attack(BadGuy badGuy, Spell spell)
+    public void Attack(GoodGuy goodGuy, Spell spell)
     {
         // Verificar si el BadGuy está vivo antes de atacar
         /*if (badGuy.AmountLife <= 0)
@@ -29,18 +29,18 @@ public class Witch : BadGuy, IMagicCharacter
         {
             damage = attack.AttackValue;
             
-            int totalDamage = damage - badGuy.GetDefense();
+            int totalDamage = damage - goodGuy.GetDefense();
         
             if (totalDamage > 0)
             {
-                badGuy.ReceiveDamage(totalDamage);
+                goodGuy.ReceiveDamage(totalDamage);
             }
             
             // Verificar si el BadGuy murió después del ataque
-            if (badGuy.AmountLife <= 0)
+            if (goodGuy.AmountLife <= 0)
             {
                 // El Wizard gana los VP del BadGuy derrotado
-                this.VP += badGuy.VP;
+                this.VP += goodGuy.VP;
             
                 // Si tiene más de 5 VP, se cura completamente
                 if (this.VP > 5)

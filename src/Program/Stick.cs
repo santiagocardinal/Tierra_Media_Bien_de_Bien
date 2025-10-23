@@ -2,7 +2,7 @@
 
 public class Stick: IAttackItem
 {
-    public string Name { get; }
+    public string Name { get; set; }
     public int AttackValue { get; set; }
     
     public Stick(string name, int attackValue)
