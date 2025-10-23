@@ -12,16 +12,14 @@ namespace Library.Tests
             string name = "Gimli";
             int amountLife = 100;
             int initialLife = 100;
-            int vp = 50;
 
             // Act
-            Elf elf= new Elf(name, amountLife, initialLife, vp);
+            Elf elf= new Elf(name, amountLife, initialLife);
 
             // Assert
             Assert.That(elf.Name, Is.EqualTo(name));
             Assert.That(elf.AmountLife, Is.EqualTo(amountLife));
             Assert.That(elf.InitialLife, Is.EqualTo(initialLife));
-            Assert.That(elf.VP, Is.EqualTo(vp));
         }
         [Test]
         public void Constructor_NullName()
@@ -33,7 +31,7 @@ namespace Library.Tests
             int vp = 50;
 
             // Act
-            Elf elf= new Elf(name, amountLife, initialLife, vp);
+            Elf elf= new Elf(name, amountLife, initialLife);
 
             // Assert
             Assert.That(elf.Name, Is.EqualTo(null));
@@ -51,7 +49,7 @@ namespace Library.Tests
             int vp = 50;
 
             // Act
-            Elf elf= new Elf(name, amountLife, initialLife, vp);
+            Elf elf= new Elf(name, amountLife, initialLife);
 
             // Assert
             Assert.That(elf.Name, Is.EqualTo(""));
@@ -69,7 +67,7 @@ namespace Library.Tests
             int vp = 50;
 
             // Act
-            Elf elf= new Elf(name, amountLife, initialLife, vp);
+            Elf elf= new Elf(name, amountLife, initialLife);
 
             // Assert
             Assert.That(elf.Name, Is.EqualTo(name));
@@ -88,7 +86,7 @@ namespace Library.Tests
             int vp = 50;
 
             // Act
-            Elf elf= new Elf(name, amountLife, initialLife, vp);
+            Elf elf= new Elf(name, amountLife, initialLife);
 
             // Assert
             Assert.That(elf.Name, Is.EqualTo(name));
@@ -107,7 +105,7 @@ namespace Library.Tests
             int vp = 50;
 
             // Act
-            Elf elf= new Elf(name, amountLife, initialLife, vp);
+            Elf elf= new Elf(name, amountLife, initialLife);
 
             // Assert
             Assert.That(elf.Name, Is.EqualTo(name));
@@ -129,8 +127,8 @@ namespace Library.Tests
             int vp2 = 50;
             
             // Act
-            Elf elf1= new Elf(name1, amountLife1, initialLife1, vp1);
-            Elf elf2= new Elf(name2, amountLife2, initialLife2, vp2);
+            Elf elf1= new Elf(name1, amountLife1, initialLife1);
+            Elf elf2= new Elf(name2, amountLife2, initialLife2);
             
             //Assert
             Assert.That(elf1,Is.Not.EqualTo(elf2));
@@ -140,7 +138,7 @@ namespace Library.Tests
         public void Dwarf_Attack_ShouldReduceEnemyLife()
         {
             // Arrange
-            Elf elf= new Elf("Gimpli", 100, 100, 4);
+            Elf elf= new Elf("Gimpli", 100, 100);
             BadGuy ogre = new BadGuy("Orc", 80, 80, 3);
             elf.Element.Add(new Sword("Hacha", 20,5)); 
 
@@ -155,7 +153,7 @@ namespace Library.Tests
         public void Dwarf_ShouldGainVP_WhenEnemyDies()
         {
             // Arrange
-            Elf elf= new Elf("Gimpli", 100, 100, 4);
+            Elf elf= new Elf("Gimpli", 100, 100);
             BadGuy ogre = new BadGuy("Orc", 10, 10, 5); 
 
             elf.Element.Add(new Sword("Hacha", 20,5));
@@ -165,14 +163,14 @@ namespace Library.Tests
 
             // Assert
             Assert.That(ogre.AmountLife, Is.EqualTo(0));   
-            Assert.That(elf.VP, Is.GreaterThanOrEqualTo(9)); 
+            Assert.That(elf.VP, Is.GreaterThanOrEqualTo(5)); 
         }
 
         [Test]
         public void Dwarf_ShouldHeal_WhenVPExceeds5()
         {
             // Arrange
-            Elf elf= new Elf("Gimpli", 100, 100, 4);
+            Elf elf= new Elf("Gimpli", 100, 100);
             BadGuy boss = new BadGuy("Boss", 10, 10, 2);
 
             elf.Element.Add(new Sword("Hacha", 20,5));
@@ -190,7 +188,7 @@ namespace Library.Tests
             public void ExchangeItem_ShouldReplaceCorrectElement()
             {
                 // Arrange
-                var character = new Elf("Gimpli", 100, 100, 10);
+                var character = new Elf("Gimpli", 100, 100);
                 IItem espada = new Sword("Espada", 10, 15);
                 IItem hacha = new Sword("Hacha", 15, 16);
 
@@ -207,7 +205,7 @@ namespace Library.Tests
             [Test]
             public void AddItem_ShouldIncreaseElementList()
             {
-                var character = new Elf("Gimpli", 100, 100,5);
+                var character = new Elf("Gimpli", 100, 100);
                 IItem item = new Sword("Espada", 10,15); 
                 character.AddItem(item);
                 Assert.That(character.Element.Count, Is.EqualTo(1));
@@ -215,14 +213,14 @@ namespace Library.Tests
             [Test]
             public void IsAlive_ShouldReturnTrue_IfLifeAboveZero()
             {
-                var character = new Elf("Gimpli", 10, 100,5);
+                var character = new Elf("Gimpli", 10, 100);
                 Assert.That(character.IsAlive(), Is.True);
             }
 
             [Test]
             public void IsAlive_ShouldReturnFalse_IfLifeZero()
             {
-                var character = new Elf("Gimpli", 0, 100,5);
+                var character = new Elf("Gimpli", 0, 100);
                 Assert.That(character.IsAlive(), Is.False);
             }
         }
