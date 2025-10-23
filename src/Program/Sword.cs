@@ -2,7 +2,7 @@
 
 public class Sword: IAttackItem, IDefenseItem
 {
-    public string Name { get; }
+    public string Name { get; set; }
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
 
