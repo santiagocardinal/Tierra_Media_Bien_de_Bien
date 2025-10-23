@@ -18,47 +18,23 @@ public class Encounter
         int largoGood = good.Count;
         int largoBad = bad.Count;
         
-        if (largoGood==1 && largoBad>1)
-        {
-            OneHeroe(good, bad);
-        }
-        else if (largoBad > 1 && largoGood>1)
+        if (largoGood > 0 && largoBad > 0)
         {
             Battle(good, bad);
         }
-        else
+        else if (largoGood == 0 && largoBad == 0)
+        {
+            Console.WriteLine("No hay héroes ni enemigos para la batalla");
+        }
+        else if (largoGood == 0)
+        {
+            Console.WriteLine("No hay suficientes héroes para la batalla");
+        }
+        else // largoBad == 0
         {
             Console.WriteLine("No hay suficientes enemigos para la batalla");
         }
-    }
 
-    public void OneHeroe(List<GoodGuy> good, List<BadGuy> bad)
-    {
-        GoodGuy heroe = good[0];
-        int i = 0;
-
-        // Mientras el héroe siga vivo y queden villanos
-        while (heroe.IsAlive() && i < bad.Count)
-        {
-            BadGuy villan = bad[i];
-            villan.Attack(heroe);
-
-            if (!heroe.IsAlive())
-            {
-                Console.WriteLine($"{heroe.Name} ha muerto en combate.");
-                good.Remove(heroe);
-                return; // termina naturalmente
-            }
-
-            // Pasamos al siguiente villano
-            i++;
-        }
-
-        // Si termina el bucle y el héroe sigue vivo
-        if (heroe.IsAlive())
-        {
-            Console.WriteLine($"{heroe.Name} ha sobrevivido a todos los villanos!");
-        }
     }
 
     public void Battle(List<GoodGuy> heroes, List<BadGuy> villanos)

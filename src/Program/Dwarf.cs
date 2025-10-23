@@ -5,7 +5,7 @@ namespace Program
 {
     public class Dwarf : GoodGuy
     {
-        public Dwarf(string name, int amountLife, int initialLife, int vp) : base(name, amountLife, initialLife, vp)
+        public Dwarf(string name, int amountLife, int initialLife) : base(name, amountLife, initialLife)
         {
         }
 

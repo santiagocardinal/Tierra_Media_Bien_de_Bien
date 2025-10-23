@@ -4,9 +4,9 @@ public class GoodGuy : Character
 {
     public int VP { get; set; }
 
-    public GoodGuy(string name, int amountLife, int initialLife,int vp): base(name,amountLife,initialLife)
+    public GoodGuy(string name, int amountLife, int initialLife): base(name,amountLife,initialLife)
     {
-        this.VP = vp;
+        this.VP = 0;
     }
     
     public override void Attack()

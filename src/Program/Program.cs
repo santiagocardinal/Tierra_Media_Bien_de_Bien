@@ -1,200 +1,221 @@
-﻿using System;
+﻿namespace Program;
 
-namespace Program
+class Program
 {
-    class Program
+    public static void Main(string[] args)
     {
-        static void Main(string[] args)
+        Console.WriteLine("==============================================");
+        Console.WriteLine("CASO DE PRUEBA 1: 1 Heroe vs 2 Villanos");
+        Console.WriteLine("==============================================\n");
+        CasoDePrueba1();
+        
+        Console.WriteLine("\n==============================================");
+        Console.WriteLine("CASO DE PRUEBA 2: 4 Heroes vs 3 Villanos");
+        Console.WriteLine("==============================================\n");
+        CasoDePrueba2();
+        
+        Console.WriteLine("\n==============================================");
+        Console.WriteLine("CASO DE PRUEBA 3: 2 Heroes vs 4 Villanos");
+        Console.WriteLine("==============================================\n");
+        CasoDePrueba3();
+    }
+
+    static void CasoDePrueba1()
+    {
+        CharacterRegistry registry = new CharacterRegistry();
+
+        // Crear 1 heroe
+        Dwarf aragorn = new Dwarf("Aragorn", 100, 100);
+        Sword excalibur = new Sword("Excalibur", 25, 10);
+        Cape capa = new Cape("Capa Protectora", 5);
+        aragorn.AddItem(excalibur);
+        aragorn.AddItem(capa);
+
+        // Crear 2 villanos
+        Ogre shrek = new Ogre("Shrek", 80, 80, 3);
+        Stick palo = new Stick("Palo Grande", 15);
+        shrek.AddItem(palo);
+
+        Vampire dracula = new Vampire("Dracula", 70, 70, 2);
+        Bow arco = new Bow("Arco Oscuro", 20);
+        dracula.AddItem(arco);
+
+        // Registrar personajes
+        registry.ArrangeCharacters(aragorn);
+        registry.ArrangeCharacters(shrek);
+        registry.ArrangeCharacters(dracula);
+
+        Console.WriteLine("Personajes registrados:");
+        Console.WriteLine($"Heroe: {aragorn.Name} - Vida: {aragorn.AmountLife}");
+        Console.WriteLine($"Villano: {shrek.Name} - Vida: {shrek.AmountLife}");
+        Console.WriteLine($"Villano: {dracula.Name} - Vida: {dracula.AmountLife}\n");
+
+        // Crear encuentro y ejecutar batalla
+        Encounter encuentro = new Encounter(registry);
+        encuentro.DoEncounter();
+
+        Console.WriteLine("\nEstado final:");
+        if (aragorn.IsAlive())
         {
-            Console.WriteLine("=== BATALLA ÉPICA: HÉROES VS HORDA DE VILLANOS ===\n");
+            Console.WriteLine($"{aragorn.Name} sobrevivio con {aragorn.AmountLife} puntos de vida y {aragorn.VP} VP");
+        }
+    }
 
-            // Crear personajes buenos (MENOS)
-            Dwarf gimli = new Dwarf("Gimli", 120, 120, 150);
-            Elf legolas = new Elf("Legolas", 100, 100, 120);
-            Wizard gandalf = new Wizard("Gandalf", 90, 90, 200);
+    static void CasoDePrueba2()
+    {
+        CharacterRegistry registry = new CharacterRegistry();
 
-            // Crear personajes malos (MÁS)
-            Ogre shrek = new Ogre("Shrek Malvado", 150, 150, 200);
-            Ogre fiona = new Ogre("Fiona Ogresa", 140, 140, 180);
-            Vampire dracula = new Vampire("Drácula", 110, 110, 180);
-            Vampire nosferatu = new Vampire("Nosferatu", 100, 100, 160);
-            Witch morgana = new Witch("Morgana", 85, 85, 150);
-            Witch bellatrix = new Witch("Bellatrix", 80, 80, 140);
+        // Crear 4 heroes
+        Elf legolas = new Elf("Legolas", 90, 90);
+        Bow arcoElfico = new Bow("Arco Elfico", 22);
+        legolas.AddItem(arcoElfico);
 
-            // Crear armas de ataque
-            Sword excalibur = new Sword("Excalibur", 35, 15);
-            Bow arcoElfico = new Bow("Arco Élfico", 28);
-            Stick bastonGandalf = new Stick("Bastón de Gandalf", 40);
-            Stick bastonOscuro = new Stick("Bastón Oscuro", 25);
-            Stick varitaMaldita = new Stick("Varita Maldita", 30);
-            Sword espadaOscura = new Sword("Espada Oscura", 32, 10);
+        Dwarf gimli = new Dwarf("Gimli", 110, 110);
+        Sword hacha = new Sword("Hacha de Guerra", 20, 12);
+        gimli.AddItem(hacha);
 
-            // Crear items de defensa
-            Cape capaElfica = new Cape("Capa Élfica", 20);
-            Cape escudo = new Cape("Capa de Invisibilidad", 25);
-            Cape capaMago = new Cape("Capa de Mago", 22);
-            Bow arcooscuro = new Bow("Arco Maldito", 18);
+        Wizard gandalf = new Wizard("Gandalf", 85, 85);
+        SpellBook libroGandalf = new SpellBook("Grimorio Blanco");
+        Attack bolaDeFuego = new Attack("Bola de Fuego", 30);
+        Defense escudoMagico = new Defense("Escudo Magico", 15);
+        libroGandalf.AddSpell(bolaDeFuego);
+        libroGandalf.AddSpell(escudoMagico);
+        gandalf.AddSpellBook(libroGandalf);
+        Stick baston = new Stick("Baston de Poder", 18);
+        gandalf.AddItem(baston);
 
-            // Equipar a los HÉROES (3 héroes)
-            Console.WriteLine("--- EQUIPANDO A LOS 3 HÉROES ---");
-            gimli.AddItem(excalibur);
-            gimli.AddItem(escudo);
-            Console.WriteLine($"⚔️ {gimli.Name} equipado con {excalibur.Name} y {escudo.Name}");
+        Elf arwen = new Elf("Arwen", 80, 80);
+        Sword espadaElfica = new Sword("Espada Elfica", 19, 8);
+        arwen.AddItem(espadaElfica);
 
-            legolas.AddItem(arcoElfico);
-            legolas.AddItem(capaElfica);
-            Console.WriteLine($" {legolas.Name} equipado con {arcoElfico.Name} y {capaElfica.Name}");
+        // Crear 3 villanos
+        Ogre grendel = new Ogre("Grendel", 95, 95, 4);
+        Stick maza = new Stick("Maza Pesada", 23);
+        grendel.AddItem(maza);
 
-            gandalf.AddItem(bastonGandalf);
-            gandalf.AddItem(capaMago);
-            Console.WriteLine($" {gandalf.Name} equipado con {bastonGandalf.Name} y {capaMago.Name}");
+        Vampire nosferatu = new Vampire("Nosferatu", 75, 75, 3);
+        Bow ballesta = new Bow("Ballesta", 18);
+        Cape capaNegra = new Cape("Capa Negra", 6);
+        nosferatu.AddItem(ballesta);
+        nosferatu.AddItem(capaNegra);
 
-            // Equipar a los VILLANOS (6 villanos)
-            Console.WriteLine("\n--- EQUIPANDO A LOS 6 VILLANOS ---");
-            shrek.AddItem(new Stick("Garrote de Ogro", 30));
-            shrek.AddItem(arcooscuro);
-            Console.WriteLine($" {shrek.Name} equipado con Garrote y Escudo");
+        Witch morgana = new Witch("Morgana", 70, 70, 3);
+        SpellBook libroOscuro = new SpellBook("Grimorio Oscuro");
+        Attack rayoNegro = new Attack("Rayo Negro", 28);
+        libroOscuro.AddSpell(rayoNegro);
+        morgana.AddSpellBook(libroOscuro);
+        Stick cetro = new Stick("Cetro Maldito", 16);
+        morgana.AddItem(cetro);
 
-            fiona.AddItem(espadaOscura);
-            Console.WriteLine($"{fiona.Name} equipada con {espadaOscura.Name}");
+        // Registrar personajes
+        registry.ArrangeCharacters(legolas);
+        registry.ArrangeCharacters(gimli);
+        registry.ArrangeCharacters(gandalf);
+        registry.ArrangeCharacters(arwen);
+        registry.ArrangeCharacters(grendel);
+        registry.ArrangeCharacters(nosferatu);
+        registry.ArrangeCharacters(morgana);
 
-            dracula.AddItem(new Stick("Colmillos Afilados", 35));
-            Console.WriteLine($" {dracula.Name} equipado con sus Colmillos Afilados");
+        Console.WriteLine("Personajes registrados:");
+        Console.WriteLine($"Heroe: {legolas.Name} - Vida: {legolas.AmountLife}");
+        Console.WriteLine($"Heroe: {gimli.Name} - Vida: {gimli.AmountLife}");
+        Console.WriteLine($"Heroe: {gandalf.Name} - Vida: {gandalf.AmountLife}");
+        Console.WriteLine($"Heroe: {arwen.Name} - Vida: {arwen.AmountLife}");
+        Console.WriteLine($"Villano: {grendel.Name} - Vida: {grendel.AmountLife}");
+        Console.WriteLine($"Villano: {nosferatu.Name} - Vida: {nosferatu.AmountLife}");
+        Console.WriteLine($"Villano: {morgana.Name} - Vida: {morgana.AmountLife}\n");
 
-            nosferatu.AddItem(new Stick("Garras Vampíricas", 32));
-            Console.WriteLine($" {nosferatu.Name} equipado con Garras Vampíricas");
+        // Crear encuentro y ejecutar batalla
+        Encounter encuentro = new Encounter(registry);
+        encuentro.DoEncounter();
 
-            morgana.AddItem(bastonOscuro);
-            Console.WriteLine($"️ {morgana.Name} equipada con {bastonOscuro.Name}");
+        Console.WriteLine("\nEstado final de los heroes:");
+        foreach (var heroe in registry.GoodGuys)
+        {
+            Console.WriteLine($"{heroe.Name} - Vida: {heroe.AmountLife} - VP: {heroe.VP}");
+        }
+    }
 
-            bellatrix.AddItem(varitaMaldita);
-            Console.WriteLine($" {bellatrix.Name} equipada con {varitaMaldita.Name}");
+    static void CasoDePrueba3()
+    {
+        CharacterRegistry registry = new CharacterRegistry();
 
-            // Simular combate épico
-            Console.WriteLine("\n╔════════════════════════════════════════╗");
-            Console.WriteLine("║  ¡COMIENZA LA BATALLA DESIGUAL!       ║");
-            Console.WriteLine("║  3 HÉROES vs 6 VILLANOS                ║");
-            Console.WriteLine("╚════════════════════════════════════════╝\n");
+        // Crear 2 heroes
+        Dwarf thorin = new Dwarf("Thorin", 120, 120);
+        Sword espadaEnana = new Sword("Espada Enana", 24, 14);
+        Cape capaPesada = new Cape("Capa Pesada", 10);
+        thorin.AddItem(espadaEnana);
+        thorin.AddItem(capaPesada);
 
-            // Estado inicial
-            Console.WriteLine("--- ESTADO INICIAL ---");
-            Console.WriteLine($"🛡️ Héroes: {gimli.Name}({gimli.AmountLife}/{gimli.InitialLife}) | {legolas.Name}({legolas.AmountLife}/{legolas.InitialLife}) | {gandalf.Name}({gandalf.AmountLife}/{gandalf.InitialLife})");
-            Console.WriteLine($"⚔️ Villanos: {shrek.Name}({shrek.AmountLife}/{shrek.InitialLife}) | {fiona.Name}({fiona.AmountLife}/{fiona.InitialLife}) | {dracula.Name}({dracula.AmountLife}/{dracula.InitialLife}) | {nosferatu.Name}({nosferatu.AmountLife}/{nosferatu.InitialLife}) | {morgana.Name}({morgana.AmountLife}/{morgana.InitialLife}) | {bellatrix.Name}({bellatrix.AmountLife}/{bellatrix.InitialLife})");
-            Console.WriteLine();
+        Wizard merlin = new Wizard("Merlin", 95, 95);
+        SpellBook libroMerlin = new SpellBook("Grimorio Ancestral");
+        Attack llamarada = new Attack("Llamarada", 32);
+        Defense barrera = new Defense("Barrera Arcana", 18);
+        libroMerlin.AddSpell(llamarada);
+        libroMerlin.AddSpell(barrera);
+        merlin.AddSpellBook(libroMerlin);
+        Stick vara = new Stick("Vara Magica", 20);
+        merlin.AddItem(vara);
 
-            // RONDA 1
-            Console.WriteLine("--- RONDA 1: Primera Oleada ---");
-            gimli.Attack(shrek);
-            legolas.Attack(dracula);
-            gandalf.Attack(morgana);
-            
-            Console.WriteLine($"\n📊 Vida después de Ronda 1:");
-            Console.WriteLine($"🛡️ Héroes: {gimli.Name}({gimli.AmountLife}/{gimli.InitialLife}) | {legolas.Name}({legolas.AmountLife}/{legolas.InitialLife}) | {gandalf.Name}({gandalf.AmountLife}/{gandalf.InitialLife})");
-            Console.WriteLine($"⚔️ Villanos: {shrek.Name}({shrek.AmountLife}/{shrek.InitialLife}) | {fiona.Name}({fiona.AmountLife}/{fiona.InitialLife}) | {dracula.Name}({dracula.AmountLife}/{dracula.InitialLife}) | {nosferatu.Name}({nosferatu.AmountLife}/{nosferatu.InitialLife}) | {morgana.Name}({morgana.AmountLife}/{morgana.InitialLife}) | {bellatrix.Name}({bellatrix.AmountLife}/{bellatrix.InitialLife})");
-            Console.WriteLine();
+        // Crear 4 villanos
+        Ogre trolloc = new Ogre("Trolloc", 100, 100, 5);
+        Stick garrote = new Stick("Garrote", 26);
+        trolloc.AddItem(garrote);
 
-            // RONDA 2: Contraataque villanos
-            Console.WriteLine("\n--- RONDA 2: Contraataque Villano ---");
-            shrek.Attack(gimli);
-            dracula.Attack(legolas);
-            morgana.Attack(gandalf);
-            fiona.Attack(gimli);
+        Vampire carmilla = new Vampire("Carmilla", 85, 85, 4);
+        Bow arcoDeSombras = new Bow("Arco de Sombras", 21);
+        Cape mantoDeSangre = new Cape("Manto de Sangre", 8);
+        carmilla.AddItem(arcoDeSombras);
+        carmilla.AddItem(mantoDeSangre);
 
-            Console.WriteLine($"\n📊 Vida después de Ronda 2:");
-            Console.WriteLine($"🛡️ Héroes: {gimli.Name}({gimli.AmountLife}/{gimli.InitialLife}) | {legolas.Name}({legolas.AmountLife}/{legolas.InitialLife}) | {gandalf.Name}({gandalf.AmountLife}/{gandalf.InitialLife})");
-            Console.WriteLine($"⚔️ Villanos: {shrek.Name}({shrek.AmountLife}/{shrek.InitialLife}) | {fiona.Name}({fiona.AmountLife}/{fiona.InitialLife}) | {dracula.Name}({dracula.AmountLife}/{dracula.InitialLife}) | {nosferatu.Name}({nosferatu.AmountLife}/{nosferatu.InitialLife}) | {morgana.Name}({morgana.AmountLife}/{morgana.InitialLife}) | {bellatrix.Name}({bellatrix.AmountLife}/{bellatrix.InitialLife})");
-            Console.WriteLine();
+        Witch bellatrix = new Witch("Bellatrix", 75, 75, 3);
+        SpellBook libroMalvado = new SpellBook("Libro Prohibido");
+        Attack maldicion = new Attack("Maldicion Mortal", 29);
+        libroMalvado.AddSpell(maldicion);
+        bellatrix.AddSpellBook(libroMalvado);
+        Stick varitaMaldita = new Stick("Varita Maldita", 17);
+        bellatrix.AddItem(varitaMaldita);
 
-            // RONDA 3
-            Console.WriteLine("\n--- RONDA 3: Los Héroes Resisten ---");
-            gimli.Attack(fiona);
-            legolas.Attack(nosferatu);
-            gandalf.Attack(bellatrix);
+        Ogre azog = new Ogre("Azog", 105, 105, 4);
+        Sword espadaOscura = new Sword("Espada Oscura", 22, 7);
+        azog.AddItem(espadaOscura);
 
-            Console.WriteLine($"\n📊 Vida después de Ronda 3:");
-            Console.WriteLine($"🛡️ Héroes: {gimli.Name}({gimli.AmountLife}/{gimli.InitialLife}) | {legolas.Name}({legolas.AmountLife}/{legolas.InitialLife}) | {gandalf.Name}({gandalf.AmountLife}/{gandalf.InitialLife})");
-            Console.WriteLine($"⚔️ Villanos: {shrek.Name}({shrek.AmountLife}/{shrek.InitialLife}) | {fiona.Name}({fiona.AmountLife}/{fiona.InitialLife}) | {dracula.Name}({dracula.AmountLife}/{dracula.InitialLife}) | {nosferatu.Name}({nosferatu.AmountLife}/{nosferatu.InitialLife}) | {morgana.Name}({morgana.AmountLife}/{morgana.InitialLife}) | {bellatrix.Name}({bellatrix.AmountLife}/{bellatrix.InitialLife})");
-            Console.WriteLine();
+        // Registrar personajes
+        registry.ArrangeCharacters(thorin);
+        registry.ArrangeCharacters(merlin);
+        registry.ArrangeCharacters(trolloc);
+        registry.ArrangeCharacters(carmilla);
+        registry.ArrangeCharacters(bellatrix);
+        registry.ArrangeCharacters(azog);
 
-            // RONDA 4: Asalto total
-            Console.WriteLine("\n--- RONDA 4: ¡ASALTO TOTAL DE VILLANOS! ---");
-            nosferatu.Attack(legolas);
-            bellatrix.Attack(gandalf);
-            shrek.Attack(gimli);
-            dracula.Attack(legolas);
+        Console.WriteLine("Personajes registrados:");
+        Console.WriteLine($"Heroe: {thorin.Name} - Vida: {thorin.AmountLife}");
+        Console.WriteLine($"Heroe: {merlin.Name} - Vida: {merlin.AmountLife}");
+        Console.WriteLine($"Villano: {trolloc.Name} - Vida: {trolloc.AmountLife}");
+        Console.WriteLine($"Villano: {carmilla.Name} - Vida: {carmilla.AmountLife}");
+        Console.WriteLine($"Villano: {bellatrix.Name} - Vida: {bellatrix.AmountLife}");
+        Console.WriteLine($"Villano: {azog.Name} - Vida: {azog.AmountLife}\n");
 
-            Console.WriteLine($"\n📊 Vida después de Ronda 4:");
-            Console.WriteLine($"🛡️ Héroes: {gimli.Name}({gimli.AmountLife}/{gimli.InitialLife}) | {legolas.Name}({legolas.AmountLife}/{legolas.InitialLife}) | {gandalf.Name}({gandalf.AmountLife}/{gandalf.InitialLife})");
-            Console.WriteLine($"⚔️ Villanos: {shrek.Name}({shrek.AmountLife}/{shrek.InitialLife}) | {fiona.Name}({fiona.AmountLife}/{fiona.InitialLife}) | {dracula.Name}({dracula.AmountLife}/{dracula.InitialLife}) | {nosferatu.Name}({nosferatu.AmountLife}/{nosferatu.InitialLife}) | {morgana.Name}({morgana.AmountLife}/{morgana.InitialLife}) | {bellatrix.Name}({bellatrix.AmountLife}/{bellatrix.InitialLife})");
-            Console.WriteLine();
+        // Crear encuentro y ejecutar batalla
+        Encounter encuentro = new Encounter(registry);
+        encuentro.DoEncounter();
 
-            // RONDA 5: Ataque desesperado
-            Console.WriteLine("\n--- RONDA 5: Ataque Desesperado de Héroes ---");
-            if (gandalf.IsAlive()) gandalf.Attack(dracula);
-            if (gimli.IsAlive()) gimli.Attack(shrek);
-            if (legolas.IsAlive()) legolas.Attack(morgana);
-
-            Console.WriteLine($"\n📊 Vida después de Ronda 5:");
-            Console.WriteLine($"🛡️ Héroes: {gimli.Name}({gimli.AmountLife}/{gimli.InitialLife}) | {legolas.Name}({legolas.AmountLife}/{legolas.InitialLife}) | {gandalf.Name}({gandalf.AmountLife}/{gandalf.InitialLife})");
-            Console.WriteLine($"⚔️ Villanos: {shrek.Name}({shrek.AmountLife}/{shrek.InitialLife}) | {fiona.Name}({fiona.AmountLife}/{fiona.InitialLife}) | {dracula.Name}({dracula.AmountLife}/{dracula.InitialLife}) | {nosferatu.Name}({nosferatu.AmountLife}/{nosferatu.InitialLife}) | {morgana.Name}({morgana.AmountLife}/{morgana.InitialLife}) | {bellatrix.Name}({bellatrix.AmountLife}/{bellatrix.InitialLife})");
-            Console.WriteLine();
-
-            // RONDA 6: Final
-            Console.WriteLine("\n--- RONDA 6: Batalla Final ---");
-            if (shrek.IsAlive()) shrek.Attack(gandalf);
-            if (fiona.IsAlive()) fiona.Attack(gimli);
-            if (morgana.IsAlive()) morgana.Attack(legolas);
-            if (bellatrix.IsAlive()) bellatrix.Attack(gandalf);
-
-            Console.WriteLine($"\n📊 Vida después de Ronda 6:");
-            Console.WriteLine($"🛡️ Héroes: {gimli.Name}({gimli.AmountLife}/{gimli.InitialLife}) | {legolas.Name}({legolas.AmountLife}/{legolas.InitialLife}) | {gandalf.Name}({gandalf.AmountLife}/{gandalf.InitialLife})");
-            Console.WriteLine($"⚔️ Villanos: {shrek.Name}({shrek.AmountLife}/{shrek.InitialLife}) | {fiona.Name}({fiona.AmountLife}/{fiona.InitialLife}) | {dracula.Name}({dracula.AmountLife}/{dracula.InitialLife}) | {nosferatu.Name}({nosferatu.AmountLife}/{nosferatu.InitialLife}) | {morgana.Name}({morgana.AmountLife}/{morgana.InitialLife}) | {bellatrix.Name}({bellatrix.AmountLife}/{bellatrix.InitialLife})");
-            Console.WriteLine();
-
-            // Resultado final
-            Console.WriteLine("\n╔════════════════════════════════════════╗");
-            Console.WriteLine("║         RESULTADO FINAL                ║");
-            Console.WriteLine("╚════════════════════════════════════════╝\n");
-
-            int heroesVivos = 0;
-            int villanosVivos = 0;
-
-            if (gimli.IsAlive()) heroesVivos++;
-            else Console.WriteLine($"💀 {gimli.Name} ha caído en batalla");
-
-            if (legolas.IsAlive()) heroesVivos++;
-            else Console.WriteLine($"💀 {legolas.Name} ha caído en batalla");
-
-            if (gandalf.IsAlive()) heroesVivos++;
-            else Console.WriteLine($"💀 {gandalf.Name} ha caído en batalla");
-
-            if (shrek.IsAlive()) villanosVivos++;
-            else Console.WriteLine($"💀 {shrek.Name} ha sido derrotado");
-
-            if (fiona.IsAlive()) villanosVivos++;
-            else Console.WriteLine($"💀 {fiona.Name} ha sido derrotada");
-
-            if (dracula.IsAlive()) villanosVivos++;
-            else Console.WriteLine($"💀 {dracula.Name} ha sido derrotado");
-
-            if (nosferatu.IsAlive()) villanosVivos++;
-            else Console.WriteLine($"💀 {nosferatu.Name} ha sido derrotado");
-
-            if (morgana.IsAlive()) villanosVivos++;
-            else Console.WriteLine($"💀 {morgana.Name} ha sido derrotada");
-
-            if (bellatrix.IsAlive()) villanosVivos++;
-            else Console.WriteLine($"💀 {bellatrix.Name} ha sido derrotada");
-
-            Console.WriteLine($"\n🛡️ Héroes supervivientes: {heroesVivos}/3");
-            Console.WriteLine($"⚔️ Villanos supervivientes: {villanosVivos}/6");
-
-            if (heroesVivos > villanosVivos)
-                Console.WriteLine("\n✨ ¡LOS HÉROES TRIUNFAN CONTRA TODO PRONÓSTICO! ✨");
-            else if (villanosVivos > heroesVivos)
-                Console.WriteLine("\n🌑 ¡LA OSCURIDAD PREVALECE! LOS VILLANOS GANAN 🌑");
-            else
-                Console.WriteLine("\n⚖️ ¡EMPATE ÉPICO! AMBOS BANDOS HAN LUCHADO VALIENTEMENTE ⚖️");
+        Console.WriteLine("\nEstado final:");
+        if (registry.GoodGuys.Count > 0)
+        {
+            Console.WriteLine("Heroes sobrevivientes:");
+            foreach (var heroe in registry.GoodGuys)
+            {
+                Console.WriteLine($"{heroe.Name} - Vida: {heroe.AmountLife} - VP: {heroe.VP}");
+            }
+        }
+        if (registry.BadGuys.Count > 0)
+        {
+            Console.WriteLine("Villanos sobrevivientes:");
+            foreach (var villano in registry.BadGuys)
+            {
+                Console.WriteLine($"{villano.Name} - Vida: {villano.AmountLife}");
+            }
         }
     }
 }
